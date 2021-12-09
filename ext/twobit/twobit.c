@@ -2,7 +2,11 @@
 
 VALUE cTwoBit;
 
-static VALUE two_bit_open(VALUE self){
+static VALUE two_bit_open(VALUE self, VALUE fname, VALUE storeMasked){\
+  char *fnamec = StringValueCStr(fname);
+  int store_maskedc = NUM2INT(storeMasked);
+  twobitOpen(fnamec, store_maskedc);
+  return Qtrue;
 }
 
 static VALUE two_bit_close(VALUE self){

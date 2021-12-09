@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.bindir = "exe"
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-  spec.extensions = ["ext/extconf.rb"]
+  spec.extensions = ["ext/twobit/extconf.rb"]
 
   # spec.add_dependency "example-gem", "~> 1.0"
 end
