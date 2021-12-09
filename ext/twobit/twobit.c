@@ -2,41 +2,55 @@
 
 VALUE cTwobit;
 
+static TwoBit *getTwoBit(VALUE self){
+  TwoBit *ptr;
+  Data_Get_Struct(self, TwoBit, ptr);
+  return ptr;
+}
+
 static VALUE
-two_bit_open(VALUE self, VALUE fname, VALUE storeMasked){\
+twobit_alloc(VALUE klass){
+  struct TwoBit *ptr = malloc(sizeof(TwoBit));
+  return Data_Wrap_Struct(klass, 0, twobitClose, ptr);
+}
+
+static VALUE
+twobit_open(VALUE klass, VALUE fname, VALUE storeMasked){
   char *fnamec = StringValueCStr(fname);
   int store_maskedc = NUM2INT(storeMasked);
-  twobitOpen(fnamec, store_maskedc);
-  return Qtrue;
+  TwoBit *tb = NULL;
+  tb = twobitOpen(fnamec, store_maskedc);
+  return Data_Make_Struct(klass, TwoBit, 0, twobitClose, tb);
 }
 
 static VALUE
-two_bit_close(VALUE self){
+twobit_close(VALUE self){
 }
 
 static VALUE
-two_bit_chroms(VALUE self) {
+twobit_chroms(VALUE self) {
 }
 
 static VALUE
-two_bit_info(VALUE self) {
+twobit_info(VALUE self) {
 }
 
 static VALUE
-two_bit_sequence(VALUE self) {
+twobit_sequence(VALUE self) {
 }
 
 static VALUE
-two_bit_bases(VALUE self) {
+twobit_bases(VALUE self) {
 }
 
 void Init_twobit(void)
 {
   cTwobit = rb_define_class("Twobit", rb_cObject);
-  rb_define_singleton_method(cTwobit, "open", two_bit_open, 2);
-  rb_define_method(cTwobit, "close", two_bit_close, 0);
-  rb_define_method(cTwobit, "chroms", two_bit_chroms, 0);
-  rb_define_method(cTwobit, "info", two_bit_info, 0);
-  rb_define_method(cTwobit, "sequence", two_bit_sequence, 0);
-  rb_define_method(cTwobit, "bases", two_bit_bases, 0);
+  rb_define_alloc_func(cTwobit, twobit_alloc);
+  rb_define_method(cTwobit, "open", twobit_open, 2);
+  rb_define_method(cTwobit, "close", twobit_close, 0);
+  rb_define_method(cTwobit, "chroms", twobit_chroms, 0);
+  rb_define_method(cTwobit, "info", twobit_info, 0);
+  rb_define_method(cTwobit, "sequence", twobit_sequence, 0);
+  rb_define_method(cTwobit, "bases", twobit_bases, 0);
 }
