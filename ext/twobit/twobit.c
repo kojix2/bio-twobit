@@ -24,10 +24,6 @@ twobit_open(VALUE klass, VALUE fname, VALUE storeMasked){
 }
 
 static VALUE
-twobit_close(VALUE self){
-}
-
-static VALUE
 twobit_chroms(VALUE self) {
 }
 
@@ -48,7 +44,6 @@ void Init_twobit(void)
   cTwobit = rb_define_class("Twobit", rb_cObject);
   rb_define_alloc_func(cTwobit, twobit_alloc);
   rb_define_method(cTwobit, "open", twobit_open, 2);
-  rb_define_method(cTwobit, "close", twobit_close, 0);
   rb_define_method(cTwobit, "chroms", twobit_chroms, 0);
   rb_define_method(cTwobit, "info", twobit_info, 0);
   rb_define_method(cTwobit, "sequence", twobit_sequence, 0);
