@@ -11,8 +11,8 @@ gem install twobit
 ## Usage
 
 ```
-TwoBit.new("foo.2bit")
-TwoBit.close
+Twobit.new("foo.2bit")
+Twobit.close
 ```
 
 ## Development

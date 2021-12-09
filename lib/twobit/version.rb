@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class TwoBit
+class Twobit
   VERSION = "0.0.0"
 end

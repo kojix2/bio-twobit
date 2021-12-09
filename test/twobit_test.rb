@@ -2,10 +2,10 @@
 
 require "test_helper"
 
-class TwoBitTest < Test::Unit::TestCase
+class TwobitTest < Test::Unit::TestCase
   test "VERSION" do
     assert do
-      ::TwoBit.const_defined?(:VERSION)
+      ::Twobit.const_defined?(:VERSION)
     end
   end
 

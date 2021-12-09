@@ -1,6 +1,6 @@
 #include "twobit.h"
 
-VALUE cTwoBit;
+VALUE cTwobit;
 
 static VALUE
 two_bit_open(VALUE self, VALUE fname, VALUE storeMasked){\
@@ -32,11 +32,11 @@ two_bit_bases(VALUE self) {
 
 void Init_twobit(void)
 {
-  cTwoBit = rb_define_class("TwoBit", rb_cObject);
-  rb_define_singleton_method(cTwoBit, "open", two_bit_open, 2);
-  rb_define_method(cTwoBit, "close", two_bit_close, 0);
-  rb_define_method(cTwoBit, "chroms", two_bit_chroms, 0);
-  rb_define_method(cTwoBit, "info", two_bit_info, 0);
-  rb_define_method(cTwoBit, "sequence", two_bit_sequence, 0);
-  rb_define_method(cTwoBit, "bases", two_bit_bases, 0);
+  cTwobit = rb_define_class("Twobit", rb_cObject);
+  rb_define_singleton_method(cTwobit, "open", two_bit_open, 2);
+  rb_define_method(cTwobit, "close", two_bit_close, 0);
+  rb_define_method(cTwobit, "chroms", two_bit_chroms, 0);
+  rb_define_method(cTwobit, "info", two_bit_info, 0);
+  rb_define_method(cTwobit, "sequence", two_bit_sequence, 0);
+  rb_define_method(cTwobit, "bases", two_bit_bases, 0);
 }

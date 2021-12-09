@@ -4,7 +4,7 @@ require_relative "lib/twobit/version"
 
 Gem::Specification.new do |spec|
   spec.name = "twobit"
-  spec.version = TwoBit::VERSION
+  spec.version = Twobit::VERSION
   spec.authors = ["kojix2"]
   spec.email = ["2xijok@gmail.com"]
 
