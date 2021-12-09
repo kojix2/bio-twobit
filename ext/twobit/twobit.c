@@ -32,7 +32,7 @@ two_bit_bases(VALUE self) {
 
 void Init_twobit(void)
 {
-  cTwoBit = rb_define_class("Twobit", rb_cObject);
+  cTwoBit = rb_define_class("TwoBit", rb_cObject);
   rb_define_singleton_method(cTwoBit, "open", two_bit_open, 0);
   rb_define_method(cTwoBit, "close", two_bit_close, 0);
   rb_define_method(cTwoBit, "chroms", two_bit_chroms, 0);
