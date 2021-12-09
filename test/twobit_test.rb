@@ -3,13 +3,26 @@
 require "test_helper"
 
 class TwobitTest < Test::Unit::TestCase
+
+  def foo_path
+    File.expand_path("fixtures/foo.2bit", __dir__)
+  end
+
+  def foo
+    @foo ||= Twobit.new(foo_path, 0) 
+  end
+
   test "VERSION" do
     assert do
       ::Twobit.const_defined?(:VERSION)
     end
   end
 
-  test "something useful" do
-    assert_equal("expected", "actual")
+  test "nchroms" do
+    assert_equal(2, foo.nchroms)
+  end
+
+  test "sz" do
+    assert_equal(161, foo.file_size)
   end
 end

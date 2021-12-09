@@ -55,6 +55,14 @@ twobit_nchroms(VALUE self) {
 }
 
 static VALUE
+twobit_file_size(VALUE self) {
+  TwoBit *tb = getTwoBit(self);
+  uint64_t file_size = tb->sz;
+  VALUE val = ULL2NUM(file_size);
+  return val;
+}
+
+static VALUE
 twobit_sequence(VALUE self) {
   return Qnil;
 }
@@ -70,6 +78,7 @@ void Init_twobit(void)
   rb_define_singleton_method(rb_Twobit, "new", twobit_new, 2);
   rb_define_method(rb_Twobit, "initialize", twobit_init, 0);
   rb_define_method(rb_Twobit, "nchroms", twobit_nchroms, 0);
+  rb_define_method(rb_Twobit, "file_size", twobit_file_size, 0);
   rb_define_method(rb_Twobit, "sequence", twobit_sequence, 0);
   rb_define_method(rb_Twobit, "bases", twobit_bases, 0);
 }
