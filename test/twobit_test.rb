@@ -9,7 +9,7 @@ class TwobitTest < Test::Unit::TestCase
   end
 
   def foo
-    @foo ||= Twobit.new(foo_path, 0) 
+    @foo ||= Twobit.new(foo_path, 1) 
   end
 
   test "VERSION" do
@@ -22,7 +22,12 @@ class TwobitTest < Test::Unit::TestCase
     assert_equal(2, foo.nchroms)
   end
 
-  test "sz" do
+  test "file_size" do
     assert_equal(161, foo.file_size)
+  end
+
+  test "sequence" do
+    assert_equal("NNNNNNNNNNNNNNNNNNNNNNNNNNACGTACGTACGTagctagctGATC",
+    foo.sequence("chr1", 24, 74))
   end
 end

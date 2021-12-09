@@ -56,15 +56,20 @@ twobit_nchroms(VALUE self) {
 
 static VALUE
 twobit_file_size(VALUE self) {
-  TwoBit *tb = getTwoBit(self);
+  TwoBit* tb = getTwoBit(self);
   uint64_t file_size = tb->sz;
   VALUE val = ULL2NUM(file_size);
   return val;
 }
 
 static VALUE
-twobit_sequence(VALUE self) {
-  return Qnil;
+twobit_sequence(VALUE self, VALUE chrom, VALUE start, VALUE end) {
+  char* c = StringValueCStr(chrom);
+  uint32_t s = NUM2ULONG(start);
+  uint32_t e = NUM2ULONG(end);
+  TwoBit* tb = getTwoBit(self);
+  char* str = twobitSequence(tb, c, s, e);
+  return rb_str_new2(str);
 }
 
 static VALUE
@@ -79,6 +84,6 @@ void Init_twobit(void)
   rb_define_method(rb_Twobit, "initialize", twobit_init, 0);
   rb_define_method(rb_Twobit, "nchroms", twobit_nchroms, 0);
   rb_define_method(rb_Twobit, "file_size", twobit_file_size, 0);
-  rb_define_method(rb_Twobit, "sequence", twobit_sequence, 0);
+  rb_define_method(rb_Twobit, "sequence", twobit_sequence, 3);
   rb_define_method(rb_Twobit, "bases", twobit_bases, 0);
 }
