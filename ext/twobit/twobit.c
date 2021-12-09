@@ -1,10 +1,35 @@
+#include <ruby.h>
+#include <stdio.h>
 #include "twobit.h"
 
-VALUE cTwobit;
+VALUE rb_Twobit;
+
+static void TwoBit_free( void* ptr );
+static size_t TwoBit_memsize( const void* ptr );
+
+static const rb_data_type_t Twobit_type = {
+    "TwoBit",
+    {0, TwoBit_free, TwoBit_memsize,},
+    0, 0,
+    RUBY_TYPED_FREE_IMMEDIATELY,
+};
+
+static void
+TwoBit_free( void* ptr )
+{
+    twobitClose( ptr );
+}
+
+static size_t
+TwoBit_memsize( const void* ptr )
+{
+    const TwoBit* data = ptr;
+    return data ? sizeof(*data) : 0;
+}
 
 static TwoBit *getTwoBit(VALUE self){
-  TwoBit *ptr;
-  Data_Get_Struct(self, TwoBit, ptr);
+  TwoBit* ptr = NULL;
+  TypedData_Get_Struct(self, TwoBit, &Twobit_type, ptr);
   return ptr;
 }
 
@@ -17,21 +42,16 @@ static VALUE
 twobit_new(VALUE klass, VALUE fname, VALUE storeMasked){
   char *fnamec = StringValueCStr(fname);
   int store_maskedc = NUM2INT(storeMasked);
-  VALUE obj;
-  TwoBit *tb = NULL;
-  tb = twobitOpen(fnamec, store_maskedc);
-  obj = Data_Make_Struct(klass, TwoBit, 0, twobitClose, tb);
-  return obj;
+  TwoBit *tb = twobitOpen(fnamec, store_maskedc);
+  return TypedData_Wrap_Struct(klass, &Twobit_type, tb);
 }
 
 static VALUE
-twobit_chroms(VALUE self) {
-  return Qnil; 
-}
-
-static VALUE
-twobit_info(VALUE self) {
-  return Qnil;
+twobit_nchroms(VALUE self) {
+  TwoBit *tb = getTwoBit(self);
+  uint32_t nc = tb->hdr->nChroms;
+  VALUE val = UINT2NUM(nc);
+  return val;
 }
 
 static VALUE
@@ -46,11 +66,10 @@ twobit_bases(VALUE self) {
 
 void Init_twobit(void)
 {
-  cTwobit = rb_define_class("Twobit", rb_cObject);
-  rb_define_singleton_method(cTwobit, "new", twobit_new, 2);
-  rb_define_method(cTwobit, "initialize", twobit_init, 0)
-  rb_define_method(cTwobit, "chroms", twobit_chroms, 0);
-  rb_define_method(cTwobit, "info", twobit_info, 0);
-  rb_define_method(cTwobit, "sequence", twobit_sequence, 0);
-  rb_define_method(cTwobit, "bases", twobit_bases, 0);
+  rb_Twobit = rb_define_class("Twobit", rb_cObject );
+  rb_define_singleton_method(rb_Twobit, "new", twobit_new, 2);
+  rb_define_method(rb_Twobit, "initialize", twobit_init, 0);
+  rb_define_method(rb_Twobit, "nchroms", twobit_nchroms, 0);
+  rb_define_method(rb_Twobit, "sequence", twobit_sequence, 0);
+  rb_define_method(rb_Twobit, "bases", twobit_bases, 0);
 }
