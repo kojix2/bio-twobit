@@ -18,4 +18,10 @@ class Twobit
     mskd = masked ? 1 : 0
     initialize_raw(fname, mskd)
   end
+
+  alias hard_masked_blocks_raw hard_masked_blocks
+
+  def hard_masked_blocks(chrom, start = 0, stop = 0)
+    hard_masked_blocks_raw(chrom, start, stop)
+  end
 end
