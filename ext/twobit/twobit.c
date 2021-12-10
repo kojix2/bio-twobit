@@ -166,9 +166,60 @@ twobit_sequence(VALUE self, VALUE chrom, VALUE start, VALUE end)
 }
 
 static VALUE
-twobit_bases(VALUE self)
+twobit_bases(VALUE self, VALUE chrom, VALUE start, VALUE end, VALUE fraction)
 {
-  return Qnil;
+  char *ch;
+  uint32_t st, en, fr;
+  TwoBit *tb;
+  void *o = NULL;
+  VALUE val, hash;
+
+  tb = getTwoBit(self);
+  ch = StringValueCStr(chrom);
+  st = NUM2UINT32(start);
+  en = NUM2UINT32(end);
+  fr = NUM2INT(fraction);
+
+  o = twobitBases(tb, ch, st, en, fr);\
+
+  if(!o) {
+    rb_raise(rb_eRuntimeError, "Received an error while determining the per-base metrics.");
+    return Qnil;
+  }
+
+  hash = rb_hash_new();
+
+  if(fr) {
+    val = DBL2NUM(((double*)o)[0]);
+  } else {
+    val = UINT32_2NUM(((uint32_t*)o)[0]);
+  }
+  rb_hash_aset(hash, rb_str_new2("A"), val);
+
+  if(fr) {
+    val = DBL2NUM(((double*)o)[1]);
+  } else {
+    val = UINT32_2NUM(((uint32_t*)o)[1]);
+  }
+  rb_hash_aset(hash, rb_str_new2("C"), val);
+
+  if(fr) {
+    val = DBL2NUM(((double*)o)[2]);
+  } else {
+    val = UINT32_2NUM(((uint32_t*)o)[2]);
+  }
+  rb_hash_aset(hash, rb_str_new2("T"), val);
+
+  if(fr) {
+    val = DBL2NUM(((double*)o)[3]);
+  } else {
+    val = UINT32_2NUM(((uint32_t*)o)[3]);
+  }
+  rb_hash_aset(hash, rb_str_new2("G"), val);
+
+  free(o);
+
+  return hash;
 }
 
 void Init_twobit(void)
@@ -182,5 +233,5 @@ void Init_twobit(void)
   rb_define_method(rb_Twobit, "file_size", twobit_file_size, 0);
   rb_define_method(rb_Twobit, "chrom_len", twobit_chrom_len, 1);
   rb_define_method(rb_Twobit, "sequence", twobit_sequence, 3);
-  rb_define_method(rb_Twobit, "bases", twobit_bases, 0);
+  rb_define_method(rb_Twobit, "bases", twobit_bases, 4);
 }

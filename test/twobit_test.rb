@@ -33,4 +33,14 @@ class TwobitTest < Test::Unit::TestCase
     assert_equal("NNNNNNNNNNNNNNNNNNNNNNNNNNACGTACGTACGTagctagctGATC",
                  foo.sequence("chr1", 24, 74))
   end
+
+  test "bases_fraction" do
+    assert_equal({ "A" => 0.12, "C" => 0.12, "T" => 0.12, "G" => 0.12 },
+                 foo.bases("chr1", 24, 74, 1))
+  end
+
+  test "bases" do
+    assert_equal({ "A" => 6, "C" => 6, "T" => 6, "G" => 7 },
+                 foo.bases("chr1", 24, 75, 0))
+  end
 end
