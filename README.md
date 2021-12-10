@@ -14,8 +14,9 @@ gem install twobit
 ## Usage
 
 ```
-Twobit.new("foo.2bit")
-Twobit.close
+g = Twobit.new("test/fixtures/foo.2bit")
+g.sequence("chr1", 50, 100)
+# => "ACGTACGTACGTagctagctGATCGATCGTAGCTAGCTAGCTAGCTGATC"
 ```
 
 ## Development
