@@ -21,12 +21,12 @@ class TwobitTest < Test::Unit::TestCase
     assert_equal(150, foo.chrom_len("chr1"))
   end
 
-  test "nchroms" do
-    assert_equal(2, foo.nchroms)
-  end
-
-  test "file_size" do
-    assert_equal(161, foo.file_size)
+  test "info" do
+    assert_equal({ "file_size" => 161,
+                   "hard_masked_length" => 150,
+                   "nChroms" => 2,
+                   "sequence_length" => 250,
+                   "soft_masked_length" => 8 }, foo.info)
   end
 
   test "sequence" do

@@ -91,30 +91,86 @@ twobit_allocate(VALUE klass)
 static VALUE
 twobit_init(VALUE klass, VALUE fpath, VALUE storeMasked)
 {
-  char *path;
-  int mask;
+  char *path = NULL;
+  int mask = 0;
+  TwoBit *tb = NULL;
 
   path = StringValueCStr(fpath);
   mask = NUM2INT(storeMasked);
 
-  DATA_PTR(klass) = twobitOpen(path, mask);
+  tb = twobitOpen(path, mask);
+  if(!tb) {
+    twobitClose(tb);
+    rb_raise(rb_eRuntimeError, "Could not open file %s", path);
+    return Qnil;
+  }
+  DATA_PTR(klass) = tb;
 
   return klass;
 }
 
 static VALUE
-twobit_nchroms(VALUE self)
+twobit_info(VALUE self)
 {
-  TwoBit *tb;
+  TwoBit *tb = getTwoBit(self);
+
+  if(!tb) {
+    rb_raise(rb_eRuntimeError, "The 2bit file handle is not open!");
+    return Qnil;
+  }
+
+  uint32_t i, j, foo;
   VALUE val;
-  int32_t nc;
+  VALUE info = rb_hash_new();
 
-  tb = getTwoBit(self);
-  nc = tb->hdr->nChroms;
+  //file size
+  val = UINT64_2NUM(tb->sz);
+  if(!val) goto error;
+  rb_hash_aset(info, rb_str_new2("file_size"), val);
 
-  val = UINT32_2NUM(nc);
+  //nContigs
+  val = UINT32_2NUM(tb->hdr->nChroms);
+  if(!val) goto error;
+  rb_hash_aset(info, rb_str_new2("nChroms"), val);
 
-  return val;
+  //sequence length
+  foo = 0;
+  for(i = 0; i < tb->hdr->nChroms; i++) {
+    foo += tb->idx->size[i];
+  }
+  val = UINT32_2NUM(foo);
+  if(!val) goto error;
+  rb_hash_aset(info, rb_str_new2("sequence_length"), val);
+
+  //hard-masked length
+  foo = 0;
+  for(i = 0; i < tb->hdr->nChroms; i++) {
+    for(j = 0; j < tb->idx->nBlockCount[i]; j++) {
+      foo += tb->idx->nBlockSizes[i][j];
+    }
+  }
+  val = UINT32_2NUM(foo);
+  if(!val) goto error;
+  rb_hash_aset(info, rb_str_new2("hard_masked_length"), val);
+
+  //soft-masked length
+  if(tb->idx->maskBlockStart) {
+    foo = 0;
+    for(i = 0; i < tb->hdr->nChroms; i++) {
+      for(j = 0; j < tb->idx->maskBlockCount[i]; j++) {
+        foo += tb->idx->maskBlockSizes[i][j];
+      }
+    }
+    val = UINT32_2NUM(foo);
+    if(!val) goto error;
+    rb_hash_aset(info, rb_str_new2("soft_masked_length"), val);
+  }
+
+  return info;
+
+error:
+  rb_raise(rb_eRuntimeError, "Received an error while gathering information on the 2bit file!");
+  return Qnil;
 }
 
 static VALUE
@@ -130,20 +186,6 @@ twobit_chrom_len(VALUE self, VALUE chrom)
   clen = twobitChromLen(tb, cname);
 
   val = UINT32_2NUM(clen);
-
-  return val;
-}
-
-static VALUE
-twobit_file_size(VALUE self)
-{
-  TwoBit *tb;
-  uint64_t size;
-  VALUE val;
-
-  tb = getTwoBit(self);
-  size = tb->sz;
-  val = UINT64_2NUM(size);
 
   return val;
 }
@@ -229,8 +271,7 @@ void Init_twobit(void)
   rb_define_alloc_func(rb_Twobit, twobit_allocate);
 
   rb_define_method(rb_Twobit, "initialize", twobit_init, 2);
-  rb_define_method(rb_Twobit, "nchroms", twobit_nchroms, 0);
-  rb_define_method(rb_Twobit, "file_size", twobit_file_size, 0);
+  rb_define_method(rb_Twobit, "info", twobit_info, 0);
   rb_define_method(rb_Twobit, "chrom_len", twobit_chrom_len, 1);
   rb_define_method(rb_Twobit, "sequence", twobit_sequence, 3);
   rb_define_method(rb_Twobit, "bases", twobit_bases, 4);
