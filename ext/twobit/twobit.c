@@ -116,6 +116,23 @@ twobit_nchroms(VALUE self)
 }
 
 static VALUE
+twobit_chrom_len(VALUE self, VALUE chrom)
+{
+  TwoBit *tb;
+  char *cname;
+  VALUE val;
+  uint32_t clen;
+
+  tb = getTwoBit(self);
+  cname = StringValueCStr(chrom);
+  clen = twobitChromLen(tb, cname);
+
+  val = UINT32_2NUM(clen);
+
+  return val;
+}
+
+static VALUE
 twobit_file_size(VALUE self)
 {
   TwoBit *tb;
@@ -161,6 +178,7 @@ void Init_twobit(void)
   rb_define_method(rb_Twobit, "initialize", twobit_init, 0);
   rb_define_method(rb_Twobit, "nchroms", twobit_nchroms, 0);
   rb_define_method(rb_Twobit, "file_size", twobit_file_size, 0);
+  rb_define_method(rb_Twobit, "chrom_len", twobit_chrom_len, 1);
   rb_define_method(rb_Twobit, "sequence", twobit_sequence, 3);
   rb_define_method(rb_Twobit, "bases", twobit_bases, 0);
 }

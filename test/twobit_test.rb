@@ -18,6 +18,10 @@ class TwobitTest < Test::Unit::TestCase
     end
   end
 
+  test "chrom_len" do
+    assert_equal(150, foo.chrom_len("chr1"))
+  end
+
   test "nchroms" do
     assert_equal(2, foo.nchroms)
   end
