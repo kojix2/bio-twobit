@@ -9,7 +9,7 @@ class TwobitTest < Test::Unit::TestCase
   end
 
   def foo
-    @foo ||= Twobit.new(foo_path, 1) 
+    @foo ||= Twobit.new(foo_path, masked: true)
   end
 
   test "VERSION" do

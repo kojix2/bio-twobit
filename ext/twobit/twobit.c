@@ -87,7 +87,7 @@ twobit_init(VALUE klass)
 }
 
 static VALUE
-twobit_new(VALUE klass, VALUE fpath, VALUE storeMasked)
+twobit_new_raw(VALUE klass, VALUE fpath, VALUE storeMasked)
 {
   char *path;
   int mask;
@@ -156,7 +156,7 @@ void Init_twobit(void)
 {
   rb_Twobit = rb_define_class("Twobit", rb_cObject);
 
-  rb_define_singleton_method(rb_Twobit, "new", twobit_new, 2);
+  rb_define_singleton_method(rb_Twobit, "new_raw", twobit_new_raw, 2);
 
   rb_define_method(rb_Twobit, "initialize", twobit_init, 0);
   rb_define_method(rb_Twobit, "nchroms", twobit_nchroms, 0);
