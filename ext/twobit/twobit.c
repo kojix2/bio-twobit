@@ -492,11 +492,11 @@ void Init_twobit(void)
 
   rb_define_alloc_func(rb_Twobit, twobit_allocate);
 
-  rb_define_method(rb_Twobit, "initialize", twobit_init, 2);
+  rb_define_private_method(rb_Twobit, "initialize_raw", twobit_init, 2);
   rb_define_method(rb_Twobit, "info", twobit_info, 0);
   rb_define_method(rb_Twobit, "chroms", twobit_chroms, 0);
-  rb_define_method(rb_Twobit, "sequence", twobit_sequence, 3);
-  rb_define_method(rb_Twobit, "bases", twobit_bases, 4);
-  rb_define_method(rb_Twobit, "hard_masked_blocks", twobit_hard_masked_blocks, 3);
-  rb_define_method(rb_Twobit, "soft_masked_blocks", twobit_soft_masked_blocks, 3);
+  rb_define_private_method(rb_Twobit, "sequence_raw", twobit_sequence, 3);
+  rb_define_private_method(rb_Twobit, "bases_raw", twobit_bases, 4);
+  rb_define_private_method(rb_Twobit, "hard_masked_blocks_raw", twobit_hard_masked_blocks, 3);
+  rb_define_private_method(rb_Twobit, "soft_masked_blocks_raw", twobit_soft_masked_blocks, 3);
 }

@@ -12,12 +12,6 @@ class Twobit
     end
   end
 
-  alias initialize_raw initialize
-  alias sequence_raw sequence
-  alias bases_raw bases
-  alias hard_masked_blocks_raw hard_masked_blocks
-  alias soft_masked_blocks_raw soft_masked_blocks
-
   def initialize(fname, masked: true)
     mskd = masked ? 1 : 0
     initialize_raw(fname, mskd)
