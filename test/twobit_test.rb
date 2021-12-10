@@ -3,7 +3,6 @@
 require "test_helper"
 
 class TwobitTest < Test::Unit::TestCase
-
   def foo_path
     File.expand_path("fixtures/foo.2bit", __dir__)
   end
@@ -32,6 +31,6 @@ class TwobitTest < Test::Unit::TestCase
 
   test "sequence" do
     assert_equal("NNNNNNNNNNNNNNNNNNNNNNNNNNACGTACGTACGTagctagctGATC",
-    foo.sequence("chr1", 24, 74))
+                 foo.sequence("chr1", 24, 74))
   end
 end

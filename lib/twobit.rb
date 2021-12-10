@@ -5,16 +5,18 @@ require_relative "twobit/twobit"
 
 class Twobit
   class << self
-    def new(fname, masked: true)
-      mskd = masked ? 1 : 0
-      Twobit.new_raw(fname, mskd)
-    end
-
     def open(fname, masked: true)
       mskd = masked ? 1 : 0
-      tb = Twobit.open_raw(fname, mskd)
+      tb = Twobit.new(fname, mskd)
       yield tb
       # tb.close
     end
+  end
+
+  alias initialize_raw initialize
+
+  def initialize(fname, masked: true)
+    mskd = masked ? 1 : 0
+    initialize_raw(fname, mskd)
   end
 end

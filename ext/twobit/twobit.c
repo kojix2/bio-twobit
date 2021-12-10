@@ -81,13 +81,15 @@ static TwoBit *getTwoBit(VALUE self)
 }
 
 static VALUE
-twobit_init(VALUE klass)
+twobit_allocate(VALUE klass)
 {
-  return klass;
+  TwoBit *tb = NULL;
+
+  return TypedData_Wrap_Struct(klass, &Twobit_type, tb);
 }
 
 static VALUE
-twobit_new_raw(VALUE klass, VALUE fpath, VALUE storeMasked)
+twobit_init(VALUE klass, VALUE fpath, VALUE storeMasked)
 {
   char *path;
   int mask;
@@ -95,9 +97,9 @@ twobit_new_raw(VALUE klass, VALUE fpath, VALUE storeMasked)
   path = StringValueCStr(fpath);
   mask = NUM2INT(storeMasked);
 
-  TwoBit *tb = twobitOpen(path, mask);
+  DATA_PTR(klass) = twobitOpen(path, mask);
 
-  return TypedData_Wrap_Struct(klass, &Twobit_type, tb);
+  return klass;
 }
 
 static VALUE
@@ -173,9 +175,9 @@ void Init_twobit(void)
 {
   rb_Twobit = rb_define_class("Twobit", rb_cObject);
 
-  rb_define_singleton_method(rb_Twobit, "new_raw", twobit_new_raw, 2);
+  rb_define_alloc_func(rb_Twobit, twobit_allocate);
 
-  rb_define_method(rb_Twobit, "initialize", twobit_init, 0);
+  rb_define_method(rb_Twobit, "initialize", twobit_init, 2);
   rb_define_method(rb_Twobit, "nchroms", twobit_nchroms, 0);
   rb_define_method(rb_Twobit, "file_size", twobit_file_size, 0);
   rb_define_method(rb_Twobit, "chrom_len", twobit_chrom_len, 1);
