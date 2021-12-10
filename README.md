@@ -23,7 +23,7 @@ g.sequence("chr1", 50, 100)
 
 ## Development
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/kojix2/twobit.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ruby-on-bioc/twobit.
 
 ## License
 
