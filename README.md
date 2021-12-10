@@ -1,6 +1,9 @@
 # Twobit
 
+Ruby bindings to lib2bit.
+
 * https://github.com/deeptools/py2bit
+* https://github.com/dpryan79/lib2bit
 
 ## Installation
 
