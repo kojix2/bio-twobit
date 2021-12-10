@@ -369,7 +369,7 @@ twobit_hard_masked_blocks(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
   end = (uint32_t)endl;
   if (startl > endl && startl > 0)
   {
-    rb_raise(rb_eRuntimeError, "The start position is greater than the end position!The start value must be less then the end value (and the end of the chromosome!");
+    rb_raise(rb_eRuntimeError, "The start value must be less then the end value (and the end of the chromosome!");
     return Qnil;
   }
   start = (uint32_t)startl;
@@ -404,9 +404,86 @@ twobit_hard_masked_blocks(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
 }
 
 static VALUE
-twobit_soft_masked_blocks(VALUE self, VALUE chrom)
+twobit_soft_masked_blocks(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
 {
-  return Qnil;
+  char *ch;
+  TwoBit *tb;
+  unsigned long startl = 0, endl = 0, totalBlocks = 0, tid;
+  uint32_t i, len, start, end, blockStart, blockEnd;
+  VALUE val, ary;
+
+  tb = getTwoBit(self);
+  ch = StringValueCStr(chrom);
+  startl = NUM2UINT32(rbstart);
+  endl = NUM2UINT32(rbend);
+
+  if (!tb)
+  {
+    rb_raise(rb_eRuntimeError, "The 2bit file handle is not open!");
+    return Qnil;
+  }
+
+  //Get the chromosome ID
+  for (i = 0; i < tb->hdr->nChroms; i++)
+  {
+    if (strcmp(tb->cl->chrom[i], ch) == 0)
+    {
+      tid = i;
+      break;
+    }
+  }
+
+  len = twobitChromLen(tb, ch);
+  if (len == 0)
+  {
+    rb_raise(rb_eRuntimeError, "The chromosome %s doesn't exist in the 2bit file!", ch);
+    return Qnil;
+  }
+  if (endl == 0)
+    endl = len;
+  if (endl > len)
+    endl = len;
+  end = (uint32_t)endl;
+  if (startl > endl && startl > 0)
+  {
+    rb_raise(rb_eRuntimeError, "The start value must be less then the end value (and the end of the chromosome!");
+    return Qnil;
+  }
+  start = (uint32_t)startl;
+
+  if (!tb->idx->maskBlockStart)
+  {
+    rb_raise(rb_eRuntimeError, "The file was not opened with storeMasked=True! Consequently, there are no stored soft-masked regions.");
+    return Qnil;
+  }
+
+  //Count the total number of overlapping N-masked blocks
+  for (i = 0; i < tb->idx->nBlockCount[tid]; i++)
+  {
+    blockStart = tb->idx->maskBlockStart[tid][i];
+    blockEnd = blockStart + tb->idx->maskBlockSizes[tid][i];
+    if (blockStart < end && blockEnd > start)
+    {
+      totalBlocks++;
+    }
+  }
+
+  //Form the output
+  ary = rb_ary_new2(totalBlocks);
+  if (totalBlocks == 0)
+    return ary;
+  for (i = 0; i < tb->idx->nBlockCount[tid]; i++)
+  {
+    blockStart = tb->idx->maskBlockStart[tid][i];
+    blockEnd = blockStart + tb->idx->maskBlockSizes[tid][i];
+    if (blockStart < end && blockEnd > start)
+    {
+      val = rb_ary_new3(2, UINT32_2NUM(blockStart), UINT32_2NUM(blockEnd));
+      rb_ary_push(ary, val);
+    }
+  }
+
+  return ary;
 }
 
 void Init_twobit(void)
@@ -421,5 +498,5 @@ void Init_twobit(void)
   rb_define_method(rb_Twobit, "sequence", twobit_sequence, 3);
   rb_define_method(rb_Twobit, "bases", twobit_bases, 4);
   rb_define_method(rb_Twobit, "hard_masked_blocks", twobit_hard_masked_blocks, 3);
-  rb_define_method(rb_Twobit, "soft_masked_blocks", twobit_soft_masked_blocks, 1);
+  rb_define_method(rb_Twobit, "soft_masked_blocks", twobit_soft_masked_blocks, 3);
 }

@@ -15,7 +15,8 @@ class Twobit
   alias initialize_raw initialize
   alias sequence_raw sequence
   alias bases_raw bases
-  alias hard_masked_blocks_raw hard_masked_blocks 
+  alias hard_masked_blocks_raw hard_masked_blocks
+  alias soft_masked_blocks_raw soft_masked_blocks
 
   def initialize(fname, masked: true)
     mskd = masked ? 1 : 0
@@ -32,5 +33,9 @@ class Twobit
 
   def hard_masked_blocks(chrom, start = 0, stop = 0)
     hard_masked_blocks_raw(chrom, start, stop)
+  end
+
+  def soft_masked_blocks(chrom, start = 0, stop = 0)
+    soft_masked_blocks_raw(chrom, start, stop)
   end
 end

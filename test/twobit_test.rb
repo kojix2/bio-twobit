@@ -42,7 +42,7 @@ class TwobitTest < Test::Unit::TestCase
 
   test "bases" do
     assert_equal({ "A" => 0.08, "C" => 0.08, "G" => 0.08666666666666667, "T" => 0.08666666666666667 },
-                          foo.bases("chr1"))
+                 foo.bases("chr1"))
     assert_equal({ "A" => 0.12, "C" => 0.12, "T" => 0.12, "G" => 0.12 },
                  foo.bases("chr1", 24, 74))
     assert_equal({ "A" => 6, "C" => 6, "T" => 6, "G" => 7 },
@@ -55,5 +55,10 @@ class TwobitTest < Test::Unit::TestCase
     assert_equal([], foo.hard_masked_blocks("chr1", 75, 100))
     assert_equal([[100, 150]], foo.hard_masked_blocks("chr1", 75, 101))
     assert_equal([[50, 100]], foo.hard_masked_blocks("chr2"))
+  end
+
+  test "soft_masked_block" do
+    assert_equal([[62, 70]], foo.soft_masked_blocks("chr1"))
+    assert_equal([], foo.soft_masked_blocks("chr1", 0, 50))
   end
 end
