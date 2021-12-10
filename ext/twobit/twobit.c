@@ -99,7 +99,8 @@ twobit_init(VALUE klass, VALUE fpath, VALUE storeMasked)
   mask = NUM2INT(storeMasked);
 
   tb = twobitOpen(path, mask);
-  if(!tb) {
+  if (!tb)
+  {
     twobitClose(tb);
     rb_raise(rb_eRuntimeError, "Could not open file %s", path);
     return Qnil;
@@ -114,7 +115,8 @@ twobit_info(VALUE self)
 {
   TwoBit *tb = getTwoBit(self);
 
-  if(!tb) {
+  if (!tb)
+  {
     rb_raise(rb_eRuntimeError, "The 2bit file handle is not open!");
     return Qnil;
   }
@@ -125,44 +127,55 @@ twobit_info(VALUE self)
 
   //file size
   val = UINT64_2NUM(tb->sz);
-  if(!val) goto error;
+  if (!val)
+    goto error;
   rb_hash_aset(info, rb_str_new2("file_size"), val);
 
   //nContigs
   val = UINT32_2NUM(tb->hdr->nChroms);
-  if(!val) goto error;
+  if (!val)
+    goto error;
   rb_hash_aset(info, rb_str_new2("nChroms"), val);
 
   //sequence length
   foo = 0;
-  for(i = 0; i < tb->hdr->nChroms; i++) {
+  for (i = 0; i < tb->hdr->nChroms; i++)
+  {
     foo += tb->idx->size[i];
   }
   val = UINT32_2NUM(foo);
-  if(!val) goto error;
+  if (!val)
+    goto error;
   rb_hash_aset(info, rb_str_new2("sequence_length"), val);
 
   //hard-masked length
   foo = 0;
-  for(i = 0; i < tb->hdr->nChroms; i++) {
-    for(j = 0; j < tb->idx->nBlockCount[i]; j++) {
+  for (i = 0; i < tb->hdr->nChroms; i++)
+  {
+    for (j = 0; j < tb->idx->nBlockCount[i]; j++)
+    {
       foo += tb->idx->nBlockSizes[i][j];
     }
   }
   val = UINT32_2NUM(foo);
-  if(!val) goto error;
+  if (!val)
+    goto error;
   rb_hash_aset(info, rb_str_new2("hard_masked_length"), val);
 
   //soft-masked length
-  if(tb->idx->maskBlockStart) {
+  if (tb->idx->maskBlockStart)
+  {
     foo = 0;
-    for(i = 0; i < tb->hdr->nChroms; i++) {
-      for(j = 0; j < tb->idx->maskBlockCount[i]; j++) {
+    for (i = 0; i < tb->hdr->nChroms; i++)
+    {
+      for (j = 0; j < tb->idx->maskBlockCount[i]; j++)
+      {
         foo += tb->idx->maskBlockSizes[i][j];
       }
     }
     val = UINT32_2NUM(foo);
-    if(!val) goto error;
+    if (!val)
+      goto error;
     rb_hash_aset(info, rb_str_new2("soft_masked_length"), val);
   }
 
@@ -170,6 +183,36 @@ twobit_info(VALUE self)
 
 error:
   rb_raise(rb_eRuntimeError, "Received an error while gathering information on the 2bit file!");
+  return Qnil;
+}
+
+static VALUE
+twobit_chroms(VALUE self)
+{
+  TwoBit *tb = getTwoBit(self);
+
+  if (!tb)
+  {
+    rb_raise(rb_eRuntimeError, "The 2bit file handle is not open!");
+    return Qnil;
+  }
+
+  uint32_t i;
+  VALUE val;
+  VALUE chroms = rb_hash_new();
+
+  for (i = 0; i < tb->hdr->nChroms; i++)
+  {
+    val = UINT32_2NUM(tb->idx->size[i]);
+    if (!val)
+      goto error;
+    rb_hash_aset(chroms, rb_str_new2(tb->cl->chrom[i]), val);
+  }
+
+  return chroms;
+
+error:
+  rb_raise(rb_eRuntimeError, "Received an error while adding an item to the output hash!");
   return Qnil;
 }
 
@@ -222,40 +265,53 @@ twobit_bases(VALUE self, VALUE chrom, VALUE start, VALUE end, VALUE fraction)
   en = NUM2UINT32(end);
   fr = NUM2INT(fraction);
 
-  o = twobitBases(tb, ch, st, en, fr);\
+  o = twobitBases(tb, ch, st, en, fr);
 
-  if(!o) {
+  if (!o)
+  {
     rb_raise(rb_eRuntimeError, "Received an error while determining the per-base metrics.");
     return Qnil;
   }
 
   hash = rb_hash_new();
 
-  if(fr) {
-    val = DBL2NUM(((double*)o)[0]);
-  } else {
-    val = UINT32_2NUM(((uint32_t*)o)[0]);
+  if (fr)
+  {
+    val = DBL2NUM(((double *)o)[0]);
+  }
+  else
+  {
+    val = UINT32_2NUM(((uint32_t *)o)[0]);
   }
   rb_hash_aset(hash, rb_str_new2("A"), val);
 
-  if(fr) {
-    val = DBL2NUM(((double*)o)[1]);
-  } else {
-    val = UINT32_2NUM(((uint32_t*)o)[1]);
+  if (fr)
+  {
+    val = DBL2NUM(((double *)o)[1]);
+  }
+  else
+  {
+    val = UINT32_2NUM(((uint32_t *)o)[1]);
   }
   rb_hash_aset(hash, rb_str_new2("C"), val);
 
-  if(fr) {
-    val = DBL2NUM(((double*)o)[2]);
-  } else {
-    val = UINT32_2NUM(((uint32_t*)o)[2]);
+  if (fr)
+  {
+    val = DBL2NUM(((double *)o)[2]);
+  }
+  else
+  {
+    val = UINT32_2NUM(((uint32_t *)o)[2]);
   }
   rb_hash_aset(hash, rb_str_new2("T"), val);
 
-  if(fr) {
-    val = DBL2NUM(((double*)o)[3]);
-  } else {
-    val = UINT32_2NUM(((uint32_t*)o)[3]);
+  if (fr)
+  {
+    val = DBL2NUM(((double *)o)[3]);
+  }
+  else
+  {
+    val = UINT32_2NUM(((uint32_t *)o)[3]);
   }
   rb_hash_aset(hash, rb_str_new2("G"), val);
 
@@ -272,6 +328,7 @@ void Init_twobit(void)
 
   rb_define_method(rb_Twobit, "initialize", twobit_init, 2);
   rb_define_method(rb_Twobit, "info", twobit_info, 0);
+  rb_define_method(rb_Twobit, "chroms", twobit_chroms, 0);
   rb_define_method(rb_Twobit, "chrom_len", twobit_chrom_len, 1);
   rb_define_method(rb_Twobit, "sequence", twobit_sequence, 3);
   rb_define_method(rb_Twobit, "bases", twobit_bases, 4);

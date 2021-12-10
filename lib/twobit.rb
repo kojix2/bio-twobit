@@ -6,8 +6,7 @@ require_relative "twobit/twobit"
 class Twobit
   class << self
     def open(fname, masked: true)
-      mskd = masked ? 1 : 0
-      tb = Twobit.new(fname, mskd)
+      tb = Twobit.new(fname, masked: masked)
       yield tb
       # tb.close
     end

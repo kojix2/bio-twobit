@@ -29,6 +29,10 @@ class TwobitTest < Test::Unit::TestCase
                    "soft_masked_length" => 8 }, foo.info)
   end
 
+  test "chroms" do
+    assert_equal({ "chr1" => 150, "chr2" => 100 }, foo.chroms)
+  end
+
   test "sequence" do
     assert_equal("NNNNNNNNNNNNNNNNNNNNNNNNNNACGTACGTACGTagctagctGATC",
                  foo.sequence("chr1", 24, 74))
