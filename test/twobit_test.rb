@@ -17,8 +17,8 @@ class TwobitTest < Test::Unit::TestCase
     end
   end
 
-  test "chrom_len" do
-    assert_equal(150, foo.chrom_len("chr1"))
+  test "chroms" do
+    assert_equal({ "chr1" => 150, "chr2" => 100 }, foo.chroms)
   end
 
   test "info" do
@@ -29,23 +29,24 @@ class TwobitTest < Test::Unit::TestCase
                    "soft_masked_length" => 8 }, foo.info)
   end
 
-  test "chroms" do
-    assert_equal({ "chr1" => 150, "chr2" => 100 }, foo.chroms)
-  end
-
   test "sequence" do
+    assert_equal("N", foo.sequence("chr1", 1, 2))
+    assert_equal("NN", foo.sequence("chr1", 1, 3))
+    assert_equal("NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNACGTACGTACGTagctagctGATCGATCGTAGCTAGCTAGCTAGCTGATCNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+                 foo.sequence("chr1"))
+    assert_equal("NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNACGTACGTACGTagctagctGATCGATCGTAGCTAGCTAGCTAGCTGATCNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+                 foo.sequence("chr1", 0, 1000))
     assert_equal("NNNNNNNNNNNNNNNNNNNNNNNNNNACGTACGTACGTagctagctGATC",
                  foo.sequence("chr1", 24, 74))
   end
 
-  test "bases_fraction" do
-    assert_equal({ "A" => 0.12, "C" => 0.12, "T" => 0.12, "G" => 0.12 },
-                 foo.bases("chr1", 24, 74, 1))
-  end
-
   test "bases" do
+    assert_equal({ "A" => 0.08, "C" => 0.08, "G" => 0.08666666666666667, "T" => 0.08666666666666667 },
+                          foo.bases("chr1"))
+    assert_equal({ "A" => 0.12, "C" => 0.12, "T" => 0.12, "G" => 0.12 },
+                 foo.bases("chr1", 24, 74))
     assert_equal({ "A" => 6, "C" => 6, "T" => 6, "G" => 7 },
-                 foo.bases("chr1", 24, 75, 0))
+                 foo.bases("chr1", 24, 75, fraction: false))
   end
 
   test "hard_masked_block" do
@@ -55,5 +56,4 @@ class TwobitTest < Test::Unit::TestCase
     assert_equal([[100, 150]], foo.hard_masked_blocks("chr1", 75, 101))
     assert_equal([[50, 100]], foo.hard_masked_blocks("chr2"))
   end
-  
 end

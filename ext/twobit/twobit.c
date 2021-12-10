@@ -217,35 +217,41 @@ error:
 }
 
 static VALUE
-twobit_chrom_len(VALUE self, VALUE chrom)
-{
-  TwoBit *tb;
-  char *cname;
-  VALUE val;
-  uint32_t clen;
-
-  tb = getTwoBit(self);
-  cname = StringValueCStr(chrom);
-  clen = twobitChromLen(tb, cname);
-
-  val = UINT32_2NUM(clen);
-
-  return val;
-}
-
-static VALUE
-twobit_sequence(VALUE self, VALUE chrom, VALUE start, VALUE end)
+twobit_sequence(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
 {
   char *ch, *str;
-  uint32_t st, en;
+  unsigned long startl = 0, endl = 0;
+  uint32_t start, end, len;
   TwoBit *tb;
 
   ch = StringValueCStr(chrom);
-  st = NUM2UINT32(start);
-  en = NUM2UINT32(end);
+  startl = NUM2UINT32(rbstart);
+  endl = NUM2UINT32(rbend);
   tb = getTwoBit(self);
 
-  str = twobitSequence(tb, ch, st, en);
+  if (!tb)
+  {
+    rb_raise(rb_eRuntimeError, "The 2bit file handle is not open!");
+    return Qnil;
+  }
+
+  len = twobitChromLen(tb, ch);
+  if (len == 0)
+  {
+    rb_raise(rb_eRuntimeError, "The chromosome %s does not exist in the 2bit file!", ch);
+    return Qnil;
+  }
+  if (endl > len)
+    endl = len;
+  end = (uint32_t)endl;
+  if (startl >= endl && startl > 0)
+  {
+    rb_raise(rb_eRuntimeError, "The start position %lu is greater than the end position %lu!", startl, endl);
+    return Qnil;
+  }
+  start = (uint32_t)startl;
+
+  str = twobitSequence(tb, ch, start, end);
 
   return rb_str_new2(str);
 }
@@ -412,7 +418,6 @@ void Init_twobit(void)
   rb_define_method(rb_Twobit, "initialize", twobit_init, 2);
   rb_define_method(rb_Twobit, "info", twobit_info, 0);
   rb_define_method(rb_Twobit, "chroms", twobit_chroms, 0);
-  rb_define_method(rb_Twobit, "chrom_len", twobit_chrom_len, 1);
   rb_define_method(rb_Twobit, "sequence", twobit_sequence, 3);
   rb_define_method(rb_Twobit, "bases", twobit_bases, 4);
   rb_define_method(rb_Twobit, "hard_masked_blocks", twobit_hard_masked_blocks, 3);

@@ -13,13 +13,22 @@ class Twobit
   end
 
   alias initialize_raw initialize
+  alias sequence_raw sequence
+  alias bases_raw bases
+  alias hard_masked_blocks_raw hard_masked_blocks 
 
   def initialize(fname, masked: true)
     mskd = masked ? 1 : 0
     initialize_raw(fname, mskd)
   end
 
-  alias hard_masked_blocks_raw hard_masked_blocks
+  def sequence(chrom, start = 0, stop = 0)
+    sequence_raw(chrom, start, stop)
+  end
+
+  def bases(chrom, start = 0, stop = 0, fraction: true)
+    bases_raw(chrom, start, stop, fraction ? 1 : 0)
+  end
 
   def hard_masked_blocks(chrom, start = 0, stop = 0)
     hard_masked_blocks_raw(chrom, start, stop)
