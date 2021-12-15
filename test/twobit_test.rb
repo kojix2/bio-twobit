@@ -11,14 +11,30 @@ class TwobitTest < Test::Unit::TestCase
     @foo ||= Twobit.new(foo_path, masked: true)
   end
 
+  def foo_closed
+    return @foo_closed if @foo_closed
+
+    t = Twobit.new(foo_path, masked: true)
+    t.close
+    @foo_closed = t
+  end
+
   test "VERSION" do
     assert do
       ::Twobit.const_defined?(:VERSION)
     end
   end
 
+  test "close" do
+    t = Twobit.new(foo_path, masked: true)
+    assert_nothing_raised do
+      assert_nil t.close
+    end
+  end
+
   test "chroms" do
     assert_equal({ "chr1" => 150, "chr2" => 100 }, foo.chroms)
+    assert_raise { foo_closed.chroms }
   end
 
   test "info" do
@@ -27,6 +43,7 @@ class TwobitTest < Test::Unit::TestCase
                    "nChroms" => 2,
                    "sequence_length" => 250,
                    "soft_masked_length" => 8 }, foo.info)
+    assert_raise { foo_closed.info }
   end
 
   test "sequence" do
@@ -38,6 +55,7 @@ class TwobitTest < Test::Unit::TestCase
                  foo.sequence("chr1", 0, 1000))
     assert_equal("NNNNNNNNNNNNNNNNNNNNNNNNNNACGTACGTACGTagctagctGATC",
                  foo.sequence("chr1", 24, 74))
+    assert_raise { foo_closed.sequence("chr1", 24, 74) }
   end
 
   test "bases" do
@@ -47,6 +65,7 @@ class TwobitTest < Test::Unit::TestCase
                  foo.bases("chr1", 24, 74))
     assert_equal({ "A" => 6, "C" => 6, "T" => 6, "G" => 7 },
                  foo.bases("chr1", 24, 75, fraction: false))
+    assert_raise { foo_closed.bases("chr1") }
   end
 
   test "hard_masked_block" do
@@ -55,6 +74,7 @@ class TwobitTest < Test::Unit::TestCase
     assert_equal([], foo.hard_masked_blocks("chr1", 75, 100))
     assert_equal([[100, 150]], foo.hard_masked_blocks("chr1", 75, 101))
     assert_equal([[50, 100]], foo.hard_masked_blocks("chr2"))
+    assert_raise { foo_closed.hard_masked_blocks("chr1") }
   end
 
   test "soft_masked_block" do

@@ -280,13 +280,18 @@ twobit_bases(VALUE self, VALUE chrom, VALUE start, VALUE end, VALUE fraction)
   VALUE val, hash;
 
   tb = getTwoBit(self);
+  if (!tb)
+  {
+    rb_raise(rb_eRuntimeError, "The 2bit file handle is not open!");
+    return Qnil;
+  }
+
   ch = StringValueCStr(chrom);
   st = NUM2UINT32(start);
   en = NUM2UINT32(end);
   fr = NUM2INT(fraction);
 
   o = twobitBases(tb, ch, st, en, fr);
-
   if (!o)
   {
     rb_raise(rb_eRuntimeError, "Received an error while determining the per-base metrics.");
@@ -458,7 +463,7 @@ twobit_soft_masked_blocks(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
   if (endl > len)
     endl = len;
   end = (uint32_t)endl;
-  if (startl > endl && startl > 0)
+  if (startl >= endl && startl > 0)
   {
     rb_raise(rb_eRuntimeError, "The start value must be less then the end value (and the end of the chromosome!");
     return Qnil;
