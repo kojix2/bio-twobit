@@ -61,6 +61,7 @@ static const rb_data_type_t Twobit_type = {
 static void
 TwoBit_free(void *ptr)
 {
+  // twobitClose checks for null
   twobitClose(ptr);
 }
 
@@ -108,6 +109,19 @@ twobit_init(VALUE klass, VALUE fpath, VALUE storeMasked)
   DATA_PTR(klass) = tb;
 
   return klass;
+}
+
+static VALUE
+twobit_close(VALUE self)
+{
+  TwoBit *tb = getTwoBit(self);
+  if (tb)
+  {
+    twobitClose(tb);
+    DATA_PTR(self) = NULL;
+  }
+
+  return Qnil;
 }
 
 static VALUE
@@ -493,6 +507,7 @@ void Init_twobit(void)
   rb_define_alloc_func(rb_Twobit, twobit_allocate);
 
   rb_define_private_method(rb_Twobit, "initialize_raw", twobit_init, 2);
+  rb_define_method(rb_Twobit, "close", twobit_close, 0);
   rb_define_method(rb_Twobit, "info", twobit_info, 0);
   rb_define_method(rb_Twobit, "chroms", twobit_chroms, 0);
   rb_define_private_method(rb_Twobit, "sequence_raw", twobit_sequence, 3);
