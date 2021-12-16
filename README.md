@@ -3,6 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/twobit.svg)](https://badge.fury.io/rb/twobit)
 [![test](https://github.com/ruby-on-bioc/twobit/actions/workflows/ci.yml/badge.svg)](https://github.com/ruby-on-bioc/twobit/actions/workflows/ci.yml)
 [![dics](https://img.shields.io/badge/docs-stable-blue.svg)](https://rubydoc.info/gems/twobit)
+[![DOI](https://zenodo.org/badge/436454379.svg)](https://zenodo.org/badge/latestdoi/436454379)
 
 Ruby bindings to [lib2bit](https://github.com/dpryan79/lib2bit) / [py2bit](https://github.com/deeptools/py2bit).
 
