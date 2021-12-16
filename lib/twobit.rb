@@ -5,16 +5,19 @@ require_relative "twobit/twobit"
 
 class Twobit
   class << self
-    def open(fname, masked: true)
-      tb = Twobit.new(fname, masked: masked)
-      yield tb
-      # tb.close
-    end
+    alias open new
   end
 
   def initialize(fname, masked: true)
     mskd = masked ? 1 : 0
     initialize_raw(fname, mskd)
+    if block_given?
+      begin
+        yield self
+      ensure
+        close
+      end
+    end
   end
 
   def sequence(chrom, start = 0, stop = 0)
