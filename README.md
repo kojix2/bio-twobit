@@ -2,6 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/twobit.svg)](https://badge.fury.io/rb/twobit)
 [![test](https://github.com/ruby-on-bioc/twobit/actions/workflows/ci.yml/badge.svg)](https://github.com/ruby-on-bioc/twobit/actions/workflows/ci.yml)
+[![dics](https://img.shields.io/badge/docs-stable-blue.svg)](https://rubydoc.info/gems/twobit)
 
 Ruby bindings to [lib2bit](https://github.com/dpryan79/lib2bit) / [py2bit](https://github.com/deeptools/py2bit).
 
@@ -27,7 +28,7 @@ irb
 ```ruby
 require 'twobit'
 
-hg38 = Twobit.new("BSgenome.Hsapiens.UCSC.hg38/inst/extdata/single_sequences.2bit")
+hg38 = Twobit.open("BSgenome.Hsapiens.UCSC.hg38/inst/extdata/single_sequences.2bit")
 
 hg38.info
 # {"file_size"=>818064875,
@@ -62,6 +63,32 @@ hg38.hard_masked_blocks("chr1", 0, 1000000)
 # [[0, 10000], [207666, 257666], [297968, 347968], [535988, 585988]]
 ```
 
+The 2-bit file must be closed explicitly. Alternatively, you can use a block. (If you forget to close the file, it will probably be closed by GC).
+
+```ruby
+# Explicitly close the file.
+tb = Twobit.open("test/fixtures/foo.2bit")
+tb.close
+
+# You can also use blocks.
+Twobit.open("test/fixtures/foo.2bit") do |t|
+  p t.info
+end
+```
+
+If you would like to include information about soft-masked bases, you need to manually specify `masked: true`
+
+```ruby
+tb = Twobit.open("test/fixtures/foo.2bit")
+tb.sequence("chr1", 60, 72)
+# => "GTAGCTAGCTGA"
+
+tb = Twobit.open("test/fixtures/foo.2bit", masked: true)
+tb.sequence("chr1", 60, 72)
+# => "GTagctagctGA"
+tb.soft_masked_blocks("chr1")
+# => [[62, 70]]
+```
 
 ## Development
 
