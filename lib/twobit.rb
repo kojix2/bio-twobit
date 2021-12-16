@@ -8,7 +8,7 @@ class Twobit
     alias open new
   end
 
-  def initialize(fname, masked: true)
+  def initialize(fname, masked: false)
     mskd = masked ? 1 : 0
     initialize_raw(fname, mskd)
     if block_given?
