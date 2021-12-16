@@ -21,9 +21,7 @@ wget https://bioconductor.org/packages/release/data/annotation/src/contrib/BSgen
 tar xvf BSgenome.Hsapiens.UCSC.hg38_1.4.4.tar.gz
 ```
 
-```sh
-irb
-```
+Quick Start
 
 ```ruby
 require 'twobit'
@@ -44,8 +42,8 @@ hg38.chroms.take(5)
 # ["chr4", 190214555],
 # ["chr5", 181538259]]
 
-hg38.sequence("chr1", 10000, 10100)
-# "TAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAAC"
+hg38.sequence("chr1", 50000, 50050)
+# "AAACAGGTTAATCGCCACGACATAGTAGTATTTAGAGTTACTAGTAAGCC"
 
 hg38.bases("chr1", 10000, 10100)
 # {"A"=>0.34, "C"=>0.49, "T"=>0.17, "G"=>0.0}
