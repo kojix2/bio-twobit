@@ -80,5 +80,6 @@ class TwobitTest < Test::Unit::TestCase
   test "soft_masked_block" do
     assert_equal([[62, 70]], foo.soft_masked_blocks("chr1"))
     assert_equal([], foo.soft_masked_blocks("chr1", 0, 50))
+    assert_raise { foo_closed.soft_masked_blocks("chr1") }
   end
 end
