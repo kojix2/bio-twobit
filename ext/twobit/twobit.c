@@ -477,7 +477,7 @@ twobit_soft_masked_blocks(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
   }
 
   //Count the total number of overlapping N-masked blocks
-  for (i = 0; i < tb->idx->nBlockCount[tid]; i++)
+  for (i = 0; i < tb->idx->maskBlockCount[tid]; i++)
   {
     blockStart = tb->idx->maskBlockStart[tid][i];
     blockEnd = blockStart + tb->idx->maskBlockSizes[tid][i];
@@ -491,7 +491,7 @@ twobit_soft_masked_blocks(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
   ary = rb_ary_new2(totalBlocks);
   if (totalBlocks == 0)
     return ary;
-  for (i = 0; i < tb->idx->nBlockCount[tid]; i++)
+  for (i = 0; i < tb->idx->maskBlockCount[tid]; i++)
   {
     blockStart = tb->idx->maskBlockStart[tid][i];
     blockEnd = blockStart + tb->idx->maskBlockSizes[tid][i];
