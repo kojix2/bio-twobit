@@ -41,12 +41,13 @@
 #error "Neither int, long, nor short is the same size as int64_t"
 #endif
 
-VALUE rb_Twobit;
+VALUE mBio;
+VALUE mTwoBit;
 
 static void TwoBit_free(void *ptr);
 static size_t TwoBit_memsize(const void *ptr);
 
-static const rb_data_type_t Twobit_type = {
+static const rb_data_type_t TwoBit_type = {
     "TwoBit",
     {
         0,
@@ -76,7 +77,7 @@ TwoBit_memsize(const void *ptr)
 static TwoBit *getTwoBit(VALUE self)
 {
   TwoBit *ptr = NULL;
-  TypedData_Get_Struct(self, TwoBit, &Twobit_type, ptr);
+  TypedData_Get_Struct(self, TwoBit, &TwoBit_type, ptr);
 
   return ptr;
 }
@@ -86,7 +87,7 @@ twobit_allocate(VALUE klass)
 {
   TwoBit *tb = NULL;
 
-  return TypedData_Wrap_Struct(klass, &Twobit_type, tb);
+  return TypedData_Wrap_Struct(klass, &TwoBit_type, tb);
 }
 
 static VALUE
@@ -507,16 +508,17 @@ twobit_soft_masked_blocks(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
 
 void Init_twobit(void)
 {
-  rb_Twobit = rb_define_class("Twobit", rb_cObject);
+  mBio = rb_define_module("Bio");
+  mTwoBit = rb_define_class_under(mBio, "TwoBit", rb_cObject);
 
-  rb_define_alloc_func(rb_Twobit, twobit_allocate);
+  rb_define_alloc_func(mTwoBit, twobit_allocate);
 
-  rb_define_private_method(rb_Twobit, "initialize_raw", twobit_init, 2);
-  rb_define_method(rb_Twobit, "close", twobit_close, 0);
-  rb_define_method(rb_Twobit, "info", twobit_info, 0);
-  rb_define_method(rb_Twobit, "chroms", twobit_chroms, 0);
-  rb_define_private_method(rb_Twobit, "sequence_raw", twobit_sequence, 3);
-  rb_define_private_method(rb_Twobit, "bases_raw", twobit_bases, 4);
-  rb_define_private_method(rb_Twobit, "hard_masked_blocks_raw", twobit_hard_masked_blocks, 3);
-  rb_define_private_method(rb_Twobit, "soft_masked_blocks_raw", twobit_soft_masked_blocks, 3);
+  rb_define_private_method(mTwoBit, "initialize_raw", twobit_init, 2);
+  rb_define_method(mTwoBit, "close", twobit_close, 0);
+  rb_define_method(mTwoBit, "info", twobit_info, 0);
+  rb_define_method(mTwoBit, "chroms", twobit_chroms, 0);
+  rb_define_private_method(mTwoBit, "sequence_raw", twobit_sequence, 3);
+  rb_define_private_method(mTwoBit, "bases_raw", twobit_bases, 4);
+  rb_define_private_method(mTwoBit, "hard_masked_blocks_raw", twobit_hard_masked_blocks, 3);
+  rb_define_private_method(mTwoBit, "soft_masked_blocks_raw", twobit_soft_masked_blocks, 3);
 }

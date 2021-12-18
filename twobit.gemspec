@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/twobit/version"
+require_relative "lib/bio/twobit/version"
 
 Gem::Specification.new do |spec|
   spec.name = "twobit"
-  spec.version = Twobit::VERSION
+  spec.version = Bio::TwoBit::VERSION
   spec.authors = ["kojix2"]
   spec.email = ["2xijok@gmail.com"]
 
@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.bindir = "exe"
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-  spec.extensions = ["ext/twobit/extconf.rb"]
+  spec.extensions = ["ext/bio/twobit/extconf.rb"]
 
   # spec.add_dependency "example-gem", "~> 1.0"
 end

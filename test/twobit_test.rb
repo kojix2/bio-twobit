@@ -2,31 +2,31 @@
 
 require "test_helper"
 
-class TwobitTest < Test::Unit::TestCase
+class TwoBitTest < Test::Unit::TestCase
   def foo_path
     File.expand_path("fixtures/foo.2bit", __dir__)
   end
 
   def foo
-    @foo ||= Twobit.new(foo_path, masked: true)
+    @foo ||= Bio::TwoBit.new(foo_path, masked: true)
   end
 
   def foo_closed
     return @foo_closed if @foo_closed
 
-    t = Twobit.new(foo_path, masked: true)
+    t = Bio::TwoBit.new(foo_path, masked: true)
     t.close
     @foo_closed = t
   end
 
   test "VERSION" do
     assert do
-      ::Twobit.const_defined?(:VERSION)
+      Bio::TwoBit.const_defined?(:VERSION)
     end
   end
 
   test "close" do
-    t = Twobit.new(foo_path, masked: true)
+    t = Bio::TwoBit.new(foo_path, masked: true)
     assert_nothing_raised do
       assert_nil t.close
     end

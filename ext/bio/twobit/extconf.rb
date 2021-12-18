@@ -2,4 +2,4 @@
 
 require "mkmf"
 
-create_makefile("twobit/twobit")
+create_makefile("bio/twobit/twobit")

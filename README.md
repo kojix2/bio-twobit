@@ -1,4 +1,4 @@
-# Twobit
+# bio-twobit
 
 [![Gem Version](https://badge.fury.io/rb/twobit.svg)](https://badge.fury.io/rb/twobit)
 [![test](https://github.com/ruby-on-bioc/twobit/actions/workflows/ci.yml/badge.svg)](https://github.com/ruby-on-bioc/twobit/actions/workflows/ci.yml)
@@ -27,7 +27,7 @@ Quick Start
 ```ruby
 require 'twobit'
 
-hg38 = Twobit.open("BSgenome.Hsapiens.UCSC.hg38/inst/extdata/single_sequences.2bit")
+hg38 = Bio::TwoBit.open("BSgenome.Hsapiens.UCSC.hg38/inst/extdata/single_sequences.2bit")
 
 hg38.info
 # {"file_size"=>818064875,
@@ -66,11 +66,11 @@ The 2-bit file must be closed explicitly. Alternatively, you can use a block. (I
 
 ```ruby
 # Explicitly close the file.
-tb = Twobit.open("test/fixtures/foo.2bit")
+tb = Bio::TwoBit.open("test/fixtures/foo.2bit")
 tb.close
 
 # You can also use blocks.
-Twobit.open("test/fixtures/foo.2bit") do |t|
+Bio::TwoBit.open("test/fixtures/foo.2bit") do |t|
   p t.info
 end
 ```
@@ -78,11 +78,11 @@ end
 If you would like to include information about soft-masked bases, you need to manually specify `masked: true`
 
 ```ruby
-tb = Twobit.open("test/fixtures/foo.2bit")
+tb = Bio::TwoBit.open("test/fixtures/foo.2bit")
 tb.sequence("chr1", 60, 72)
 # => "GTAGCTAGCTGA"
 
-tb = Twobit.open("test/fixtures/foo.2bit", masked: true)
+tb = Bio::TwoBit.open("test/fixtures/foo.2bit", masked: true)
 tb.sequence("chr1", 60, 72)
 # => "GTagctagctGA"
 tb.soft_masked_blocks("chr1")

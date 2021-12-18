@@ -18,7 +18,8 @@ require "rake/extensiontask"
 task build: :compile
 
 Rake::ExtensionTask.new("twobit") do |ext|
-  ext.lib_dir = "lib/twobit"
+  ext.lib_dir = "lib/bio/twobit"
+  ext.ext_dir = "ext/bio/twobit"
 end
 
 task default: %i[clobber compile test rubocop]
