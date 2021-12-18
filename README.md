@@ -1,8 +1,8 @@
 # bio-twobit
 
-[![Gem Version](https://badge.fury.io/rb/twobit.svg)](https://badge.fury.io/rb/twobit)
-[![test](https://github.com/ruby-on-bioc/twobit/actions/workflows/ci.yml/badge.svg)](https://github.com/ruby-on-bioc/twobit/actions/workflows/ci.yml)
-[![dics](https://img.shields.io/badge/docs-stable-blue.svg)](https://rubydoc.info/gems/twobit)
+[![Gem Version](https://badge.fury.io/rb/bio-twobit.svg)](https://badge.fury.io/rb/bio-twobit)
+[![test](https://github.com/ruby-on-bioc/bio-twobit/actions/workflows/ci.yml/badge.svg)](https://github.com/ruby-on-bioc/bio-twobit/actions/workflows/ci.yml)
+[![dics](https://img.shields.io/badge/docs-stable-blue.svg)](https://rubydoc.info/gems/bio-twobit)
 [![DOI](https://zenodo.org/badge/436454379.svg)](https://zenodo.org/badge/latestdoi/436454379)
 
 Ruby bindings to [lib2bit](https://github.com/dpryan79/lib2bit) / [py2bit](https://github.com/deeptools/py2bit).
@@ -10,7 +10,7 @@ Ruby bindings to [lib2bit](https://github.com/dpryan79/lib2bit) / [py2bit](https
 ## Installation
 
 ```sh
-gem install twobit
+gem install bio-twobit
 ```
 
 ## Usage
@@ -25,7 +25,7 @@ tar xvf BSgenome.Hsapiens.UCSC.hg38_1.4.4.tar.gz
 Quick Start
 
 ```ruby
-require 'twobit'
+require 'bio/twobit'
 
 hg38 = Bio::TwoBit.open("BSgenome.Hsapiens.UCSC.hg38/inst/extdata/single_sequences.2bit")
 
@@ -91,7 +91,7 @@ tb.soft_masked_blocks("chr1")
 
 ## Development
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/ruby-on-bioc/twobit.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ruby-on-bioc/bio-twobit.
 
 ## License
 
