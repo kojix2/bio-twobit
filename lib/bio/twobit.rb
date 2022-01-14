@@ -8,6 +8,8 @@ module Bio
   class TwoBit
     def self.open(*args, **kwargs)
       file = new(*args, **kwargs)
+      return file unless block_given?
+
       begin
         yield file
       ensure
