@@ -18,8 +18,24 @@ module Bio
 
     def initialize(fname, masked: false)
       raise "TwoBit::new() does not take block; use TwoBit::open() instead" if block_given?
-      mskd = masked ? 1 : 0
+
+      @fname = fname
+      if masked
+        mskd = 1
+        @masked = true
+      else
+        mskd = 0
+        @masked = false
+      end
       initialize_raw(fname, mskd)
+    end
+
+    def path
+      @fname
+    end
+
+    def masked?
+      @masked
     end
 
     def sequence(chrom, start = 0, stop = 0)

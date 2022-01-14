@@ -41,6 +41,22 @@ class TwoBitTest < Test::Unit::TestCase
     end
   end
 
+  test "path" do
+    assert_equal(foo_path, foo.path)
+    assert_equal(foo_path, foo_closed.path)
+  end
+
+  test "masked?" do
+    assert_equal(true, foo.masked?)
+    assert_equal(true, foo_closed.masked?)
+    t = Bio::TwoBit.open(foo_path, masked: false)
+    assert_equal(false, t.masked?)
+    t.close
+    t = Bio::TwoBit.open(foo_path)
+    assert_equal(false, t.masked?)
+    t.close
+  end
+
   test "close" do
     t = Bio::TwoBit.new(foo_path, masked: true)
     assert_nothing_raised do
