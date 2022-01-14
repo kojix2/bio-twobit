@@ -25,11 +25,32 @@ class TwoBitTest < Test::Unit::TestCase
     end
   end
 
+  test "open_with_block" do
+    t = Bio::TwoBit.open(foo_path, masked: true) do |f|
+      assert_equal({ "chr1" => 150, "chr2" => 100 }, f.chroms)
+      assert_equal(false, f.closed?)
+    end
+    assert_equal(true, t.closed?)
+  end
+
+  test "new_with_block" do
+    assert_raises(RuntimeError) do
+      Bio::TwoBit.new(foo_path, masked: true) do |f|
+        0
+      end
+    end
+  end
+
   test "close" do
     t = Bio::TwoBit.new(foo_path, masked: true)
     assert_nothing_raised do
       assert_nil t.close
     end
+  end
+
+  test "closed?" do
+    assert_equal false, foo.closed?
+    assert_equal true, foo_closed.closed?
   end
 
   test "chroms" do

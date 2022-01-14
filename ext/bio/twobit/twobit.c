@@ -126,6 +126,20 @@ twobit_close(VALUE self)
 }
 
 static VALUE
+twobit_closed_question_mark(VALUE self)
+{
+  TwoBit *tb = getTwoBit(self);
+  if (tb)
+  {
+    return Qfalse;
+  }
+  else
+  {
+    return Qtrue;
+  }
+}
+
+static VALUE
 twobit_info(VALUE self)
 {
   TwoBit *tb = getTwoBit(self);
@@ -517,6 +531,7 @@ void Init_twobit(void)
 
   rb_define_private_method(mTwoBit, "initialize_raw", twobit_init, 2);
   rb_define_method(mTwoBit, "close", twobit_close, 0);
+  rb_define_method(mTwoBit, "closed?", twobit_closed_question_mark, 0);
   rb_define_method(mTwoBit, "info", twobit_info, 0);
   rb_define_method(mTwoBit, "chroms", twobit_chroms, 0);
   rb_define_private_method(mTwoBit, "sequence_raw", twobit_sequence, 3);
