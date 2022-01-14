@@ -4,6 +4,7 @@ require_relative "twobit/version"
 require_relative "twobit/twobit"
 
 module Bio
+  # Reader for .2bit files (i.e., from UCSC genome browser)
   class TwoBit
     class << self
       alias open new
