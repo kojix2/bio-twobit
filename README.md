@@ -29,6 +29,9 @@ require 'bio/twobit'
 
 hg38 = Bio::TwoBit.open("BSgenome.Hsapiens.UCSC.hg38/inst/extdata/single_sequences.2bit")
 
+hg38.path
+# "BSgenome.Hsapiens.UCSC.hg38/inst/extdata/single_sequences.2bit"
+
 hg38.info
 # {"file_size"=>818064875,
 # "nChroms"=>640,
@@ -75,6 +78,10 @@ Bio::TwoBit.open("test/fixtures/foo.2bit") do |t|
 end
 ```
 
+```ruby
+tb.closed? # true / false
+```
+
 If you would like to include information about soft-masked bases, you need to manually specify `masked: true`
 
 ```ruby
@@ -87,6 +94,10 @@ tb.sequence("chr1", 60, 72)
 # => "GTagctagctGA"
 tb.soft_masked_blocks("chr1")
 # => [[62, 70]]
+```
+
+```ruby
+tb.masked? # true / false
 ```
 
 ## Development
