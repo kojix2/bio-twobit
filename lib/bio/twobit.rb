@@ -6,20 +6,20 @@ require_relative "twobit/twobit"
 module Bio
   # Reader for .2bit files (i.e., from UCSC genome browser)
   class TwoBit
-    class << self
-      alias open new
+    def self.open(*args, **kwargs)
+      file = new(*args, **kwargs)
+      begin
+        yield file
+      ensure
+        file.close
+      end
+      file
     end
 
     def initialize(fname, masked: false)
+      raise "TwoBit::new() does not take block; use TwoBit::open() instead" if block_given?
       mskd = masked ? 1 : 0
       initialize_raw(fname, mskd)
-      if block_given?
-        begin
-          yield self
-        ensure
-          close
-        end
-      end
     end
 
     def sequence(chrom, start = 0, stop = 0)
