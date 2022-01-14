@@ -35,7 +35,7 @@ class TwoBitTest < Test::Unit::TestCase
 
   test "new_with_block" do
     assert_raises(RuntimeError) do
-      Bio::TwoBit.new(foo_path, masked: true) do |f|
+      Bio::TwoBit.new(foo_path, masked: true) do |_f|
         0
       end
     end
