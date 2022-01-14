@@ -351,7 +351,8 @@ twobit_hard_masked_blocks(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
 {
   char *ch;
   TwoBit *tb;
-  unsigned long startl = 0, endl = 0, totalBlocks = 0, tid;
+  long tid = -1;
+  unsigned long startl = 0, endl = 0, totalBlocks = 0;
   uint32_t i, len, start, end, blockStart, blockEnd;
   VALUE val, ary;
 
@@ -428,7 +429,8 @@ twobit_soft_masked_blocks(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
 {
   char *ch;
   TwoBit *tb;
-  unsigned long startl = 0, endl = 0, totalBlocks = 0, tid;
+  long tid = -1;
+  unsigned long startl = 0, endl = 0, totalBlocks = 0;
   uint32_t i, len, start, end, blockStart, blockEnd;
   VALUE val, ary;
 
