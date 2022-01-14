@@ -18,8 +18,7 @@ gem install bio-twobit
 Downlaod BSgenome.Hsapiens.UCSC.hg38
 
 ```sh
-wget https://bioconductor.org/packages/release/data/annotation/src/contrib/BSgenome.Hsapiens.UCSC.hg38_1.4.4.tar.gz
-tar xvf BSgenome.Hsapiens.UCSC.hg38_1.4.4.tar.gz
+wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.2bit
 ```
 
 Quick Start
@@ -27,10 +26,10 @@ Quick Start
 ```ruby
 require 'bio/twobit'
 
-hg38 = Bio::TwoBit.open("BSgenome.Hsapiens.UCSC.hg38/inst/extdata/single_sequences.2bit")
+hg38 = Bio::TwoBit.open("hg38.2bit")
 
 hg38.path
-# "BSgenome.Hsapiens.UCSC.hg38/inst/extdata/single_sequences.2bit"
+# "hg38.2bit"
 
 hg38.info
 # {"file_size"=>818064875,
