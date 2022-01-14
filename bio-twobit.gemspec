@@ -24,6 +24,4 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
   spec.extensions    = ["ext/bio/twobit/extconf.rb"]
-
-  # spec.add_dependency "example-gem", "~> 1.0"
 end
