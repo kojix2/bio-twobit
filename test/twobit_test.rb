@@ -93,6 +93,7 @@ class TwoBitTest < Test::Unit::TestCase
     assert_equal("NNNNNNNNNNNNNNNNNNNNNNNNNNACGTACGTACGTagctagctGATC",
                  foo.sequence("chr1", 24, 74))
     assert_raise { foo_closed.sequence("chr1", 24, 74) }
+    assert_raise(ArgumentError) { foo.sequence("chr1", 0, -1) }
   end
 
   test "bases" do
@@ -103,6 +104,7 @@ class TwoBitTest < Test::Unit::TestCase
     assert_equal({ "A" => 6, "C" => 6, "T" => 6, "G" => 7 },
                  foo.bases("chr1", 24, 75, fraction: false))
     assert_raise { foo_closed.bases("chr1") }
+    assert_raise(ArgumentError) { foo.bases("chr1", 0, -1) }
   end
 
   test "hard_masked_block" do

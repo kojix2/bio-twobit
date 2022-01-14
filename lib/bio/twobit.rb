@@ -41,18 +41,30 @@ module Bio
     end
 
     def sequence(chrom, start = 0, stop = 0)
+      raise ArgumentError, "negative start position" if start.negative?
+      raise ArgumentError, "negative stop position" if stop.negative?
+
       sequence_raw(chrom, start, stop)
     end
 
     def bases(chrom, start = 0, stop = 0, fraction: true)
+      raise ArgumentError, "negative start position" if start.negative?
+      raise ArgumentError, "negative stop position" if stop.negative?
+
       bases_raw(chrom, start, stop, fraction ? 1 : 0)
     end
 
     def hard_masked_blocks(chrom, start = 0, stop = 0)
+      raise ArgumentError, "negative start position" if start.negative?
+      raise ArgumentError, "negative stop position" if stop.negative?
+
       hard_masked_blocks_raw(chrom, start, stop)
     end
 
     def soft_masked_blocks(chrom, start = 0, stop = 0)
+      raise ArgumentError, "negative start position" if start.negative?
+      raise ArgumentError, "negative stop position" if stop.negative?
+
       soft_masked_blocks_raw(chrom, start, stop)
     end
   end
