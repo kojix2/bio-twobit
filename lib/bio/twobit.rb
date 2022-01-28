@@ -40,6 +40,8 @@ module Bio
       @masked
     end
 
+    # Since "end" is a reserved word in Ruby, use "stop" instead.
+
     def sequence(chrom, start = 0, stop = 0)
       raise ArgumentError, "negative start position" if start.negative?
       raise ArgumentError, "negative stop position" if stop.negative?
