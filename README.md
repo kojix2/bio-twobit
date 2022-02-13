@@ -103,6 +103,10 @@ tb.masked? # true / false
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/ruby-on-bioc/bio-twobit.
 
+    Do you need commit rights to my repository?
+    Do you want to get admin rights and take over the project?
+    If so, please feel free to contact us @kojix2.
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
