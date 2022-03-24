@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.27
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'>
+<h1 id="label-bio-twobit">bio-twobit</h1>
+
+<p><a href="https://badge.fury.io/rb/bio-twobit"><img src="https://badge.fury.io/rb/bio-twobit.svg"></a> <a href="https://github.com/ruby-on-bioc/bio-twobit/actions/workflows/ci.yml"><img src="https://github.com/ruby-on-bioc/bio-twobit/actions/workflows/ci.yml/badge.svg"></a> <a href="https://rubydoc.info/gems/bio-twobit"><img src="https://img.shields.io/badge/docs-stable-blue.svg"></a> <a href="https://zenodo.org/badge/latestdoi/436454379"><img src="https://zenodo.org/badge/436454379.svg"></a></p>
+
+<p>Ruby bindings to <a href="https://github.com/dpryan79/lib2bit">lib2bit</a> / <a href="https://github.com/deeptools/py2bit">py2bit</a>.</p>
+
+<h2 id="label-Installation">Installation</h2>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='id identifier rubyid_install'>install</span> <span class='id identifier rubyid_bio'>bio</span><span class='op'>-</span><span class='id identifier rubyid_twobit'>twobit</span>
+</code></pre>
+
+<h2 id="label-Usage">Usage</h2>
+
+<p>Downlaod BSgenome.Hsapiens.UCSC.hg38</p>
+
+<pre class="code ruby"><code class="ruby">wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.2bit
+</code></pre>
+
+<p>Quick Start</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>bio/twobit</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='id identifier rubyid_hg38'>hg38</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Bio.html" title="Bio (module)">Bio</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit.html" title="Bio::TwoBit (class)">TwoBit</a></span></span><span class='period'>.</span><span class='id identifier rubyid_open'><span class='object_link'><a href="Bio/TwoBit.html#open-class_method" title="Bio::TwoBit.open (method)">open</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hg38.2bit</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_hg38'>hg38</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span>
+<span class='comment'># &quot;hg38.2bit&quot;
+</span>
+<span class='id identifier rubyid_hg38'>hg38</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span>
+<span class='comment'># {&quot;file_size&quot;=&gt;818064875,
+</span><span class='comment'># &quot;nChroms&quot;=&gt;640,
+</span><span class='comment'># &quot;sequence_length&quot;=&gt;3272116950,
+</span><span class='comment'># &quot;hard_masked_length&quot;=&gt;161368694,
+</span><span class='comment'># &quot;soft_masked_length&quot;=&gt;0}
+</span>
+<span class='id identifier rubyid_hg38'>hg38</span><span class='period'>.</span><span class='id identifier rubyid_chroms'>chroms</span><span class='period'>.</span><span class='id identifier rubyid_take'>take</span><span class='lparen'>(</span><span class='int'>5</span><span class='rparen'>)</span>
+<span class='comment'># [[&quot;chr1&quot;, 248956422],
+</span><span class='comment'># [&quot;chr2&quot;, 242193529],
+</span><span class='comment'># [&quot;chr3&quot;, 198295559],
+</span><span class='comment'># [&quot;chr4&quot;, 190214555],
+</span><span class='comment'># [&quot;chr5&quot;, 181538259]]
+</span>
+<span class='id identifier rubyid_hg38'>hg38</span><span class='period'>.</span><span class='id identifier rubyid_sequence'>sequence</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>50000</span><span class='comma'>,</span> <span class='int'>50050</span><span class='rparen'>)</span>
+<span class='comment'># &quot;AAACAGGTTAATCGCCACGACATAGTAGTATTTAGAGTTACTAGTAAGCC&quot;
+</span>
+<span class='id identifier rubyid_hg38'>hg38</span><span class='period'>.</span><span class='id identifier rubyid_bases'>bases</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>10000</span><span class='comma'>,</span> <span class='int'>10100</span><span class='rparen'>)</span>
+<span class='comment'># {&quot;A&quot;=&gt;0.34, &quot;C&quot;=&gt;0.49, &quot;T&quot;=&gt;0.17, &quot;G&quot;=&gt;0.0}
+</span>
+<span class='id identifier rubyid_hg38'>hg38</span><span class='period'>.</span><span class='id identifier rubyid_bases'>bases</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>10000</span><span class='comma'>,</span> <span class='int'>10100</span><span class='comma'>,</span> <span class='label'>fraction:</span> <span class='kw'>false</span><span class='rparen'>)</span>
+<span class='comment'># {&quot;A&quot;=&gt;34, &quot;C&quot;=&gt;49, &quot;T&quot;=&gt;17, &quot;G&quot;=&gt;0}
+</span>
+<span class='id identifier rubyid_hg38'>hg38</span><span class='period'>.</span><span class='id identifier rubyid_bases'>bases</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> 
+<span class='comment'># {&quot;A&quot;=&gt;0.26940569141052323,
+</span><span class='comment'># &quot;C&quot;=&gt;0.19302592242428676,
+</span><span class='comment'># &quot;T&quot;=&gt;0.2701041550155312,
+</span><span class='comment'># &quot;G&quot;=&gt;0.19325280952182064}
+</span>
+<span class='id identifier rubyid_hg38'>hg38</span><span class='period'>.</span><span class='id identifier rubyid_hard_masked_blocks'>hard_masked_blocks</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>0</span><span class='comma'>,</span> <span class='int'>1000000</span><span class='rparen'>)</span>
+<span class='comment'># [[0, 10000], [207666, 257666], [297968, 347968], [535988, 585988]]
+</span></code></pre>
+
+<p>The 2-bit file must be closed explicitly. Alternatively, you can use a block. (If you forget to close the file, it will probably be closed by GC).</p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># Explicitly close the file.
+</span><span class='id identifier rubyid_tb'>tb</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Bio.html" title="Bio (module)">Bio</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit.html" title="Bio::TwoBit (class)">TwoBit</a></span></span><span class='period'>.</span><span class='id identifier rubyid_open'><span class='object_link'><a href="Bio/TwoBit.html#open-class_method" title="Bio::TwoBit.open (method)">open</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>test/fixtures/foo.2bit</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_tb'>tb</span><span class='period'>.</span><span class='id identifier rubyid_close'>close</span>
+
+<span class='comment'># You can also use blocks.
+</span><span class='const'><span class='object_link'><a href="Bio.html" title="Bio (module)">Bio</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit.html" title="Bio::TwoBit (class)">TwoBit</a></span></span><span class='period'>.</span><span class='id identifier rubyid_open'><span class='object_link'><a href="Bio/TwoBit.html#open-class_method" title="Bio::TwoBit.open (method)">open</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>test/fixtures/foo.2bit</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_tb'>tb</span><span class='period'>.</span><span class='id identifier rubyid_closed?'>closed?</span> <span class='comment'># true / false
+</span></code></pre>
+
+<p>If you would like to include information about soft-masked bases, you need to manually specify <code>masked: true</code></p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_tb'>tb</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Bio.html" title="Bio (module)">Bio</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit.html" title="Bio::TwoBit (class)">TwoBit</a></span></span><span class='period'>.</span><span class='id identifier rubyid_open'><span class='object_link'><a href="Bio/TwoBit.html#open-class_method" title="Bio::TwoBit.open (method)">open</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>test/fixtures/foo.2bit</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_tb'>tb</span><span class='period'>.</span><span class='id identifier rubyid_sequence'>sequence</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>60</span><span class='comma'>,</span> <span class='int'>72</span><span class='rparen'>)</span>
+<span class='comment'># =&gt; &quot;GTAGCTAGCTGA&quot;
+</span>
+<span class='id identifier rubyid_tb'>tb</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Bio.html" title="Bio (module)">Bio</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit.html" title="Bio::TwoBit (class)">TwoBit</a></span></span><span class='period'>.</span><span class='id identifier rubyid_open'><span class='object_link'><a href="Bio/TwoBit.html#open-class_method" title="Bio::TwoBit.open (method)">open</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>test/fixtures/foo.2bit</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>masked:</span> <span class='kw'>true</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_tb'>tb</span><span class='period'>.</span><span class='id identifier rubyid_sequence'>sequence</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>60</span><span class='comma'>,</span> <span class='int'>72</span><span class='rparen'>)</span>
+<span class='comment'># =&gt; &quot;GTagctagctGA&quot;
+</span><span class='id identifier rubyid_tb'>tb</span><span class='period'>.</span><span class='id identifier rubyid_soft_masked_blocks'>soft_masked_blocks</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chr1</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='comment'># =&gt; [[62, 70]]
+</span></code></pre>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_tb'>tb</span><span class='period'>.</span><span class='id identifier rubyid_masked?'>masked?</span> <span class='comment'># true / false
+</span></code></pre>
+
+<h2 id="label-Development">Development</h2>
+
+<p>Bug reports and pull requests are welcome on GitHub at <a href="https://github.com/ruby-on-bioc/bio-twobit">github.com/ruby-on-bioc/bio-twobit</a>.</p>
+
+<pre class="code ruby"><code class="ruby">Do you need commit rights to my repository?
+Do you want to get admin rights and take over the project?
+If so, please feel free to contact us @kojix2.
+</code></pre>
+
+<h2 id="label-License">License</h2>
+
+<p>The gem is available as open source under the terms of the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
+</div></div>
+
+      <div id="footer">
+  Generated on Thu Mar 24 11:32:56 2022 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.27 (ruby-3.1.1).
+</div>
+
+    </div>
+  </body>
+</html>
