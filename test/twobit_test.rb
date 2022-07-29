@@ -101,10 +101,12 @@ class TwoBitTest < Test::Unit::TestCase
                  foo.bases("chr1"))
     assert_equal({ "A" => 0.12, "C" => 0.12, "T" => 0.12, "G" => 0.12 },
                  foo.bases("chr1", 24, 74))
-    assert_equal({ "A" => 0.2, "C" => 0.2, "T" => 0.3, "G" => 0.3 },
-                 foo.bases("chr2", 10, 20))
     assert_equal({ "A" => 6, "C" => 6, "T" => 6, "G" => 7 },
                  foo.bases("chr1", 24, 75, fraction: false))
+    assert_equal({ "A" => 0.2, "C" => 0.2, "T" => 0.3, "G" => 0.3 },
+                 foo.bases("chr2", 10, 20))
+    assert_equal({ "A" => 2, "C" => 2, "T" => 3, "G" => 3 },
+                 foo.bases("chr2", 10, 20, fraction: false))
     assert_raise { foo_closed.bases("chr1") }
     assert_raise(ArgumentError) { foo.bases("chr1", 0, -1) }
   end
