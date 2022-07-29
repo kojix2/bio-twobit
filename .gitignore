@@ -12,3 +12,5 @@
 *.a
 *.lock
 mkmf.log
+
+.gitpod.yml
