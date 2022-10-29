@@ -621,6 +621,8 @@
       <pre class="lines">
 
 
+216
+217
 218
 219
 220
@@ -647,41 +649,39 @@
 241
 242
 243
-244
-245
-246</pre>
+244</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/twobit/twobit.c', line 218</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/twobit/twobit.c', line 216</span>
 
 static VALUE
 twobit_chroms(VALUE self)
 {
-  TwoBit *tb = getTwoBit(self);
+	TwoBit *tb = getTwoBit(self);
 
-  if (!tb)
-  {
-    rb_raise(rb_eRuntimeError, &quot;The 2bit file handle is not open!&quot;);
-    return Qnil;
-  }
+	if (!tb)
+	{
+		rb_raise(rb_eRuntimeError, &quot;The 2bit file handle is not open!&quot;);
+		return Qnil;
+	}
 
-  uint32_t i;
-  VALUE val;
-  VALUE chroms = rb_hash_new();
+	uint32_t i;
+	VALUE val;
+	VALUE chroms = rb_hash_new();
 
-  for (i = 0; i &lt; tb-&gt;hdr-&gt;nChroms; i++)
-  {
-    val = UINT32_2NUM(tb-&gt;idx-&gt;size[i]);
-    if (!val)
-      goto error;
-    rb_hash_aset(chroms, rb_str_new2(tb-&gt;cl-&gt;chrom[i]), val);
-  }
+	for (i = 0; i &lt; tb-&gt;hdr-&gt;nChroms; i++)
+	{
+		val = UINT32_2NUM(tb-&gt;idx-&gt;size[i]);
+		if (!val)
+			goto error;
+		rb_hash_aset(chroms, rb_str_new2(tb-&gt;cl-&gt;chrom[i]), val);
+	}
 
-  return chroms;
+	return chroms;
 
 error:
-  rb_raise(rb_eRuntimeError, &quot;Received an error while adding an item to the output hash!&quot;);
-  return Qnil;
+	rb_raise(rb_eRuntimeError, &quot;Received an error while adding an item to the output hash!&quot;);
+	return Qnil;
 }</pre>
     </td>
   </tr>
@@ -703,6 +703,8 @@ error:
       <pre class="lines">
 
 
+113
+114
 115
 116
 117
@@ -712,24 +714,22 @@ error:
 121
 122
 123
-124
-125
-126</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/twobit/twobit.c', line 115</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/twobit/twobit.c', line 113</span>
 
 static VALUE
 twobit_close(VALUE self)
 {
-  TwoBit *tb = getTwoBit(self);
-  if (tb)
-  {
-    twobitClose(tb);
-    DATA_PTR(self) = NULL;
-  }
+	TwoBit *tb = getTwoBit(self);
+	if (tb)
+	{
+		twobitClose(tb);
+		DATA_PTR(self) = NULL;
+	}
 
-  return Qnil;
+	return Qnil;
 }</pre>
     </td>
   </tr>
@@ -773,6 +773,8 @@ twobit_close(VALUE self)
       <pre class="lines">
 
 
+126
+127
 128
 129
 130
@@ -783,25 +785,23 @@ twobit_close(VALUE self)
 135
 136
 137
-138
-139
-140</pre>
+138</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/twobit/twobit.c', line 128</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/twobit/twobit.c', line 126</span>
 
 static VALUE
 twobit_closed_question_mark(VALUE self)
 {
-  TwoBit *tb = getTwoBit(self);
-  if (tb)
-  {
-    return Qfalse;
-  }
-  else
-  {
-    return Qtrue;
-  }
+	TwoBit *tb = getTwoBit(self);
+	if (tb)
+	{
+		return Qfalse;
+	}
+	else
+	{
+		return Qtrue;
+	}
 }</pre>
     </td>
   </tr>
@@ -881,6 +881,8 @@ twobit_closed_question_mark(VALUE self)
       <pre class="lines">
 
 
+140
+141
 142
 143
 144
@@ -953,87 +955,85 @@ twobit_closed_question_mark(VALUE self)
 211
 212
 213
-214
-215
-216</pre>
+214</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'ext/bio/twobit/twobit.c', line 142</span>
+      <pre class="code"><span class="info file"># File 'ext/bio/twobit/twobit.c', line 140</span>
 
 static VALUE
 twobit_info(VALUE self)
 {
-  TwoBit *tb = getTwoBit(self);
+	TwoBit *tb = getTwoBit(self);
 
-  if (!tb)
-  {
-    rb_raise(rb_eRuntimeError, &quot;The 2bit file handle is not open!&quot;);
-    return Qnil;
-  }
+	if (!tb)
+	{
+		rb_raise(rb_eRuntimeError, &quot;The 2bit file handle is not open!&quot;);
+		return Qnil;
+	}
 
-  uint32_t i, j, foo;
-  VALUE val;
-  VALUE info = rb_hash_new();
+	uint32_t i, j, foo;
+	VALUE val;
+	VALUE info = rb_hash_new();
 
-  //file size
-  val = UINT64_2NUM(tb-&gt;sz);
-  if (!val)
-    goto error;
-  rb_hash_aset(info, rb_str_new2(&quot;file_size&quot;), val);
+	// file size
+	val = UINT64_2NUM(tb-&gt;sz);
+	if (!val)
+		goto error;
+	rb_hash_aset(info, rb_str_new2(&quot;file_size&quot;), val);
 
-  //nContigs
-  val = UINT32_2NUM(tb-&gt;hdr-&gt;nChroms);
-  if (!val)
-    goto error;
-  rb_hash_aset(info, rb_str_new2(&quot;nChroms&quot;), val);
+	// nContigs
+	val = UINT32_2NUM(tb-&gt;hdr-&gt;nChroms);
+	if (!val)
+		goto error;
+	rb_hash_aset(info, rb_str_new2(&quot;nChroms&quot;), val);
 
-  //sequence length
-  foo = 0;
-  for (i = 0; i &lt; tb-&gt;hdr-&gt;nChroms; i++)
-  {
-    foo += tb-&gt;idx-&gt;size[i];
-  }
-  val = UINT32_2NUM(foo);
-  if (!val)
-    goto error;
-  rb_hash_aset(info, rb_str_new2(&quot;sequence_length&quot;), val);
+	// sequence length
+	foo = 0;
+	for (i = 0; i &lt; tb-&gt;hdr-&gt;nChroms; i++)
+	{
+		foo += tb-&gt;idx-&gt;size[i];
+	}
+	val = UINT32_2NUM(foo);
+	if (!val)
+		goto error;
+	rb_hash_aset(info, rb_str_new2(&quot;sequence_length&quot;), val);
 
-  //hard-masked length
-  foo = 0;
-  for (i = 0; i &lt; tb-&gt;hdr-&gt;nChroms; i++)
-  {
-    for (j = 0; j &lt; tb-&gt;idx-&gt;nBlockCount[i]; j++)
-    {
-      foo += tb-&gt;idx-&gt;nBlockSizes[i][j];
-    }
-  }
-  val = UINT32_2NUM(foo);
-  if (!val)
-    goto error;
-  rb_hash_aset(info, rb_str_new2(&quot;hard_masked_length&quot;), val);
+	// hard-masked length
+	foo = 0;
+	for (i = 0; i &lt; tb-&gt;hdr-&gt;nChroms; i++)
+	{
+		for (j = 0; j &lt; tb-&gt;idx-&gt;nBlockCount[i]; j++)
+		{
+			foo += tb-&gt;idx-&gt;nBlockSizes[i][j];
+		}
+	}
+	val = UINT32_2NUM(foo);
+	if (!val)
+		goto error;
+	rb_hash_aset(info, rb_str_new2(&quot;hard_masked_length&quot;), val);
 
-  //soft-masked length
-  if (tb-&gt;idx-&gt;maskBlockStart)
-  {
-    foo = 0;
-    for (i = 0; i &lt; tb-&gt;hdr-&gt;nChroms; i++)
-    {
-      for (j = 0; j &lt; tb-&gt;idx-&gt;maskBlockCount[i]; j++)
-      {
-        foo += tb-&gt;idx-&gt;maskBlockSizes[i][j];
-      }
-    }
-    val = UINT32_2NUM(foo);
-    if (!val)
-      goto error;
-    rb_hash_aset(info, rb_str_new2(&quot;soft_masked_length&quot;), val);
-  }
+	// soft-masked length
+	if (tb-&gt;idx-&gt;maskBlockStart)
+	{
+		foo = 0;
+		for (i = 0; i &lt; tb-&gt;hdr-&gt;nChroms; i++)
+		{
+			for (j = 0; j &lt; tb-&gt;idx-&gt;maskBlockCount[i]; j++)
+			{
+				foo += tb-&gt;idx-&gt;maskBlockSizes[i][j];
+			}
+		}
+		val = UINT32_2NUM(foo);
+		if (!val)
+			goto error;
+		rb_hash_aset(info, rb_str_new2(&quot;soft_masked_length&quot;), val);
+	}
 
-  return info;
+	return info;
 
 error:
-  rb_raise(rb_eRuntimeError, &quot;Received an error while gathering information on the 2bit file!&quot;);
-  return Qnil;
+	rb_raise(rb_eRuntimeError, &quot;Received an error while gathering information on the 2bit file!&quot;);
+	return Qnil;
 }</pre>
     </td>
   </tr>
@@ -1245,7 +1245,7 @@ error:
 </div>
 
       <div id="footer">
-  Generated on Wed Oct 19 00:33:55 2022 by
+  Generated on Sat Oct 29 17:30:27 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
