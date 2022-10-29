@@ -22,4 +22,4 @@ Rake::ExtensionTask.new("twobit") do |ext|
   ext.ext_dir = "ext/bio/twobit"
 end
 
-task default: %i[clobber compile test rubocop]
+task default: %i[clobber compile test]
