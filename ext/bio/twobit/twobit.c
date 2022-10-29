@@ -61,6 +61,7 @@ TwoBit_free(void *ptr)
 {
 	// twobitClose checks for null
 	twobitClose(ptr);
+	xfree(ptr);
 }
 
 	static size_t
