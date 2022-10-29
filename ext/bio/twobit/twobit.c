@@ -56,7 +56,7 @@ static const rb_data_type_t TwoBit_type = {
 	.flags = RUBY_TYPED_FREE_IMMEDIATELY,
 };
 
-	static void
+static void
 TwoBit_free(void *ptr)
 {
 	// twobitClose checks for null
@@ -64,7 +64,7 @@ TwoBit_free(void *ptr)
 	xfree(ptr);
 }
 
-	static size_t
+static size_t
 TwoBit_memsize(const void *ptr)
 {
 	const TwoBit *data = ptr;
@@ -80,7 +80,7 @@ static TwoBit *getTwoBit(VALUE self)
 	return ptr;
 }
 
-	static VALUE
+static VALUE
 twobit_allocate(VALUE klass)
 {
 	TwoBit *tb = NULL;
@@ -88,7 +88,7 @@ twobit_allocate(VALUE klass)
 	return TypedData_Wrap_Struct(klass, &TwoBit_type, tb);
 }
 
-	static VALUE
+static VALUE
 twobit_init(VALUE klass, VALUE fpath, VALUE storeMasked)
 {
 	char *path = NULL;
@@ -110,7 +110,7 @@ twobit_init(VALUE klass, VALUE fpath, VALUE storeMasked)
 	return klass;
 }
 
-	static VALUE
+static VALUE
 twobit_close(VALUE self)
 {
 	TwoBit *tb = getTwoBit(self);
@@ -123,7 +123,7 @@ twobit_close(VALUE self)
 	return Qnil;
 }
 
-	static VALUE
+static VALUE
 twobit_closed_question_mark(VALUE self)
 {
 	TwoBit *tb = getTwoBit(self);
@@ -137,7 +137,7 @@ twobit_closed_question_mark(VALUE self)
 	}
 }
 
-	static VALUE
+static VALUE
 twobit_info(VALUE self)
 {
 	TwoBit *tb = getTwoBit(self);
@@ -213,7 +213,7 @@ error:
 	return Qnil;
 }
 
-	static VALUE
+static VALUE
 twobit_chroms(VALUE self)
 {
 	TwoBit *tb = getTwoBit(self);
@@ -243,7 +243,7 @@ error:
 	return Qnil;
 }
 
-	static VALUE
+static VALUE
 twobit_sequence(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
 {
 	char *ch, *str;
@@ -283,7 +283,7 @@ twobit_sequence(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
 	return rb_str_new2(str);
 }
 
-	static VALUE
+static VALUE
 twobit_bases(VALUE self, VALUE chrom, VALUE start, VALUE end, VALUE fraction)
 {
 	char *ch;
@@ -358,7 +358,7 @@ twobit_bases(VALUE self, VALUE chrom, VALUE start, VALUE end, VALUE fraction)
 	return hash;
 }
 
-	static VALUE
+static VALUE
 twobit_hard_masked_blocks(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
 {
 	char *ch;
@@ -436,7 +436,7 @@ twobit_hard_masked_blocks(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
 	return ary;
 }
 
-	static VALUE
+static VALUE
 twobit_soft_masked_blocks(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
 {
 	char *ch;
