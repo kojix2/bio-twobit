@@ -13,6 +13,9 @@ Ruby bindings to [lib2bit](https://github.com/dpryan79/lib2bit) / [py2bit](https
 gem install bio-twobit
 ```
 
+Linux and macOS are supported.
+Windows is currently not supported.
+
 ## Usage
 
 Downlaod BSgenome.Hsapiens.UCSC.hg38
