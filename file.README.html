@@ -160,6 +160,15 @@
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_tb'>tb</span><span class='period'>.</span><span class='id identifier rubyid_masked?'>masked?</span> <span class='comment'># true / false
 </span></code></pre>
 
+<h2 id="label-hg19-2C+hg38-2C+hs1">hg19, hg38, hs1</h2>
+
+<p>Some reference genomes are provided as classes in advance. These classes automatically download 2bit files from the UCSC site into a cache directory upon first use.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_hg19'>hg19</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Bio.html" title="Bio (module)">Bio</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit.html" title="Bio::TwoBit (class)">TwoBit</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit/Hg19.html" title="Bio::TwoBit::Hg19 (class)">Hg19</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Bio/TwoBit/Hg19.html#initialize-instance_method" title="Bio::TwoBit::Hg19#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_hg38'>hg38</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Bio.html" title="Bio (module)">Bio</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit.html" title="Bio::TwoBit (class)">TwoBit</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit/Hg38.html" title="Bio::TwoBit::Hg38 (class)">Hg38</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Bio/TwoBit/Hg38.html#initialize-instance_method" title="Bio::TwoBit::Hg38#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_hs1'>hs1</span>  <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Bio.html" title="Bio (module)">Bio</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit.html" title="Bio::TwoBit (class)">TwoBit</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit/Hs1.html" title="Bio::TwoBit::Hs1 (class)">Hs1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Bio/TwoBit/Hs1.html#initialize-instance_method" title="Bio::TwoBit::Hs1#initialize (method)">new</a></span></span>
+</code></pre>
+
 <h2 id="label-Development">Development</h2>
 
 <p>Bug reports and pull requests are welcome on GitHub at <a href="https://github.com/ruby-on-bioc/bio-twobit">github.com/ruby-on-bioc/bio-twobit</a>.</p>
@@ -171,11 +180,11 @@ If so, please feel free to contact us @kojix2.
 
 <h2 id="label-License">License</h2>
 
-<p>The gem is available as open source under the terms of the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
+<p>The gem is available as open source under the terms of the <a href="https://opensource.org/licenses/MIT">MIT License</a>. Some code was forked from red-datasets. <a href="https://github.com/red-data-tools/red-datasets">github.com/red-data-tools/red-datasets</a></p>
 </div></div>
 
       <div id="footer">
-  Generated on Wed Jan 11 10:07:04 2023 by
+  Generated on Wed Jan 11 10:17:25 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.2.0).
 </div>
