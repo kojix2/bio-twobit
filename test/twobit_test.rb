@@ -125,4 +125,20 @@ class TwoBitTest < Test::Unit::TestCase
     assert_equal([], foo.soft_masked_blocks("chr1", 0, 50))
     assert_raise { foo_closed.soft_masked_blocks("chr1") }
   end
+
+  test "hg19" do
+    hg19 = Bio::TwoBit::Hg19.new
+    assert_equal({ "file_size" => 816_241_703,
+                   "nChroms" => 93,
+                   "sequence_length" => 3_137_161_264,
+                   "hard_masked_length" => 239_850_802 }, hg19.info)
+    assert_equal "TGTCACCTCT", hg19.sequence("chr20", 200_000, 200_010)
+    hg19 = Bio::TwoBit::Hg19.new(masked: true)
+    assert_equal({ "file_size" => 816_241_703,
+                   "nChroms" => 93,
+                   "sequence_length" => 3_137_161_264,
+                   "soft_masked_length"=>1466923288,
+                   "hard_masked_length" => 239_850_802 }, hg19.info)
+    assert_equal "tgtcacctct", hg19.sequence("chr20", 200_000, 200_010)
+  end
 end

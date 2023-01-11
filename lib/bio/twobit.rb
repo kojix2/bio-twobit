@@ -100,6 +100,6 @@ module Bio
 
     autoload :Hg19, "bio/twobit/references/hg19"
     autoload :Hg38, "bio/twobit/references/hg38"
-    autoload :Hs1, "bio/twobit/references/hs1"
+    autoload :Hs1,  "bio/twobit/references/hs1"
   end
 end
