@@ -12,16 +12,30 @@ module Bio
   class TwoBit
     attr_reader :metadata
 
-    def self.open(*args, **kwargs)
-      file = new(*args, **kwargs)
-      return file unless block_given?
+    class << self
+      def open(*args, **kwargs)
+        file = new(*args, **kwargs)
+        return file unless block_given?
 
-      begin
-        yield file
-      ensure
-        file.close
+        begin
+          yield file
+        ensure
+          file.close
+        end
+        file
       end
-      file
+
+      def const_missing(name)
+        @missing_const ||= []
+        super if @missing_const.include? name
+        @missing_const << name
+        path = File.join(__dir__, "twobit/references", "#{name.to_s.downcase}.rb")
+        if File.exist?(path)
+          require path
+          return const_get(name)
+        end
+        super
+      end
     end
 
     def initialize(fname, masked: false)
@@ -97,15 +111,5 @@ module Bio
       downloader = Downloader.new(url)
       downloader.download(output_path)
     end
-
-    autoload :Hg19, "bio/twobit/references/hg19"
-    autoload :Hg38, "bio/twobit/references/hg38"
-    autoload :Hs1,  "bio/twobit/references/hs1"
-    autoload :Mm9,  "bio/twobit/references/mm9"
-    autoload :Mm10, "bio/twobit/references/mm10"
-    autoload :Mm39, "bio/twobit/references/mm39"
-    autoload :DanRer10, "bio/twobit/references/danRer10"
-    autoload :DanRer11, "bio/twobit/references/danRer11"
-    autoload :Dm6, "bio/twobit/references/dm6"
   end
 end
