@@ -169,7 +169,17 @@
 <span class='id identifier rubyid_hs1'>hs1</span>  <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Bio.html" title="Bio (module)">Bio</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit.html" title="Bio::TwoBit (class)">TwoBit</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit/Hs1.html" title="Bio::TwoBit::Hs1 (class)">Hs1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Bio/TwoBit/Hs1.html#initialize-instance_method" title="Bio::TwoBit::Hs1#initialize (method)">new</a></span></span>
 </code></pre>
 
-<p>Adding a new reference file is easy. Add <a href="https://github.com/ruby-on-bioc/bio-twobit/blob/main/lib/bio/twobit/references/template.erb">here</a> the id of the genome you want to use. Pull requests are welcome.</p>
+<p>Adding a new reference genome is easy. Add <a href="https://github.com/ruby-on-bioc/bio-twobit/blob/main/lib/bio/twobit/references/template.erb">here</a> the id of the genome you want to use.</p>
+
+<pre class="code ruby"><code class="ruby">git clone https://github.com/ruby-on-bioc/bio-twobit
+vi lib/bio/twobit/references/template.erb # Add your id to ids list.
+ruby lib/bio/twobit/references/template.erb
+rake install
+</code></pre>
+
+<p>If you want to use 2-bit files from locations other than UCSC, create your own classes <a href="https://github.com/ruby-on-bioc/bio-twobit/tree/main/lib/bio/twobit/references">here</a>.</p>
+
+<p>Pull requests are welcome.</p>
 
 <h2 id="label-Development">Development</h2>
 
@@ -188,7 +198,7 @@ If so, please feel free to contact us @kojix2.
 </div></div>
 
       <div id="footer">
-  Generated on Wed Jan 11 12:44:14 2023 by
+  Generated on Wed Jan 11 12:48:22 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.2.0).
 </div>
