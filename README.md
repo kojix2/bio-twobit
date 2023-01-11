@@ -67,7 +67,7 @@ hg38.hard_masked_blocks("chr1", 0, 1000000)
 # [[0, 10000], [207666, 257666], [297968, 347968], [535988, 585988]]
 ```
 
-The 2-bit file must be closed explicitly. Alternatively, you can use a block. (If you forget to close the file, it will probably be closed by GC).
+The 2-bit file must be closed explicitly. Alternatively, you can use a block. Even if it is not closed, it will probably be closed by GC and there will be no problem. But this is not guaranteed.
 
 ```ruby
 # Explicitly close the file.
