@@ -7,8 +7,8 @@ module Bio
         super(**kwargs, &block)
       end
 
-      def initialize
-        super(prepare_data)
+      def initialize(**kwargs)
+        super(prepare_data, **kwargs)
       end
 
       private
