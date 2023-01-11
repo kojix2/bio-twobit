@@ -24,7 +24,7 @@ Downlaod BSgenome.Hsapiens.UCSC.hg38
 wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.2bit
 ```
 
-Quick Start
+### Quick Start
 
 ```ruby
 require 'bio/twobit'
@@ -47,10 +47,19 @@ hg38.chroms.take(5)
 # ["chr3", 198295559],
 # ["chr4", 190214555],
 # ["chr5", 181538259]]
+```
 
+Fetch a sequence
+
+```ruby
 hg38.sequence("chr1", 50000, 50050)
-# "AAACAGGTTAATCGCCACGACATAGTAGTATTTAGAGTTACTAGTAAGCC"
+# "AAACAGGTTAATCGCCACGACATAGTAGTATTTAGAGTTACTAGTAAGCC" # length 50
+```
 
+* The first number is the **(0-based)** position on the chromosome/contig where the sequence should begin. 
+* The second number is the **(1-based)** position on the chromosome where the sequence should end.
+
+```ruby
 hg38.bases("chr1", 10000, 10100)
 # {"A"=>0.34, "C"=>0.49, "T"=>0.17, "G"=>0.0}
 
@@ -84,7 +93,7 @@ end
 tb.closed? # true / false
 ```
 
-If you would like to include information about soft-masked bases, you need to manually specify `masked: true`
+If you would like to include information about soft-masked bases, you need to specify `masked: true`
 
 ```ruby
 tb = Bio::TwoBit.open("test/fixtures/foo.2bit")
