@@ -137,7 +137,7 @@ class TwoBitTest < Test::Unit::TestCase
     assert_equal({ "file_size" => 816_241_703,
                    "nChroms" => 93,
                    "sequence_length" => 3_137_161_264,
-                   "soft_masked_length"=>1466923288,
+                   "soft_masked_length" => 1_466_923_288,
                    "hard_masked_length" => 239_850_802 }, hg19.info)
     assert_equal "tgtcacctct", hg19.sequence("chr20", 200_000, 200_010)
   end
