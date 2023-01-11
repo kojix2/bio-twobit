@@ -98,9 +98,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/bio/twobit/reference/hg19.rb<span class="defines">,<br />
-  lib/bio/twobit/references/hg19.rb</span>
-</dd>
+    <dd>lib/bio/twobit/references/hg19.rb</dd>
   </dl>
   
 </div>
@@ -123,37 +121,6 @@
   <p class="inherited"><span class='object_link'><a href="../TwoBit.html#metadata-instance_method" title="Bio::TwoBit#metadata (method)">#metadata</a></span></p>
 
 
-  
-    <h2>
-      Class Method Summary
-      <small><a href="#" class="summary_toggle">collapse</a></small>
-    </h2>
-
-    <ul class="summary">
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#open-class_method" title="open (class method)">.<strong>open</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-    </ul>
   
     <h2>
       Instance Method Summary
@@ -200,6 +167,11 @@
   
   
   
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="ReferenceGenome.html" title="Bio::TwoBit::ReferenceGenome (class)">ReferenceGenome</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="ReferenceGenome.html#open-class_method" title="Bio::TwoBit::ReferenceGenome.open (method)">open</a></span></p>
+
+  
+  
   
   
   
@@ -207,7 +179,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../TwoBit.html" title="Bio::TwoBit (class)">Bio::TwoBit</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../TwoBit.html#bases-instance_method" title="Bio::TwoBit#bases (method)">#bases</a></span>, <span class='object_link'><a href="../TwoBit.html#chroms-instance_method" title="Bio::TwoBit#chroms (method)">#chroms</a></span>, <span class='object_link'><a href="../TwoBit.html#clear_cache!-instance_method" title="Bio::TwoBit#clear_cache! (method)">#clear_cache!</a></span>, <span class='object_link'><a href="../TwoBit.html#close-instance_method" title="Bio::TwoBit#close (method)">#close</a></span>, <span class='object_link'><a href="../TwoBit.html#closed%3F-instance_method" title="Bio::TwoBit#closed? (method)">#closed?</a></span>, <span class='object_link'><a href="../TwoBit.html#hard_masked_blocks-instance_method" title="Bio::TwoBit#hard_masked_blocks (method)">#hard_masked_blocks</a></span>, <span class='object_link'><a href="../TwoBit.html#info-instance_method" title="Bio::TwoBit#info (method)">#info</a></span>, <span class='object_link'><a href="../TwoBit.html#masked%3F-instance_method" title="Bio::TwoBit#masked? (method)">#masked?</a></span>, <span class='object_link'><a href="../TwoBit.html#path-instance_method" title="Bio::TwoBit#path (method)">#path</a></span>, <span class='object_link'><a href="../TwoBit.html#sequence-instance_method" title="Bio::TwoBit#sequence (method)">#sequence</a></span>, <span class='object_link'><a href="../TwoBit.html#soft_masked_blocks-instance_method" title="Bio::TwoBit#soft_masked_blocks (method)">#soft_masked_blocks</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="../TwoBit.html#bases-instance_method" title="Bio::TwoBit#bases (method)">#bases</a></span>, <span class='object_link'><a href="../TwoBit.html#chroms-instance_method" title="Bio::TwoBit#chroms (method)">#chroms</a></span>, <span class='object_link'><a href="../TwoBit.html#clear_cache!-instance_method" title="Bio::TwoBit#clear_cache! (method)">#clear_cache!</a></span>, <span class='object_link'><a href="../TwoBit.html#close-instance_method" title="Bio::TwoBit#close (method)">#close</a></span>, <span class='object_link'><a href="../TwoBit.html#closed%3F-instance_method" title="Bio::TwoBit#closed? (method)">#closed?</a></span>, <span class='object_link'><a href="../TwoBit.html#hard_masked_blocks-instance_method" title="Bio::TwoBit#hard_masked_blocks (method)">#hard_masked_blocks</a></span>, <span class='object_link'><a href="../TwoBit.html#info-instance_method" title="Bio::TwoBit#info (method)">#info</a></span>, <span class='object_link'><a href="../TwoBit.html#masked%3F-instance_method" title="Bio::TwoBit#masked? (method)">#masked?</a></span>, <span class='object_link'><a href="../TwoBit.html#open-class_method" title="Bio::TwoBit.open (method)">open</a></span>, <span class='object_link'><a href="../TwoBit.html#path-instance_method" title="Bio::TwoBit#path (method)">#path</a></span>, <span class='object_link'><a href="../TwoBit.html#sequence-instance_method" title="Bio::TwoBit#sequence (method)">#sequence</a></span>, <span class='object_link'><a href="../TwoBit.html#soft_masked_blocks-instance_method" title="Bio::TwoBit#soft_masked_blocks (method)">#soft_masked_blocks</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
@@ -237,23 +209,27 @@
       <pre class="lines">
 
 
+6
 7
 8
 9
 10
 11
 12
-13</pre>
+13
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/twobit/reference/hg19.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/twobit/references/hg19.rb', line 6</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='ivar'>@metadata</span>      <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Metadata.html" title="Bio::TwoBit::Metadata (class)">Metadata</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../TwoBit.html#initialize-instance_method" title="Bio::TwoBit#initialize (method)">new</a></span></span>
   <span class='ivar'>@metadata</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>   <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hg19</span><span class='tstring_end'>&quot;</span></span>
   <span class='ivar'>@metadata</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hg19</span><span class='tstring_end'>&quot;</span></span>
   <span class='ivar'>@metadata</span><span class='period'>.</span><span class='id identifier rubyid_url'>url</span>  <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://hgdownload.soe.ucsc.edu/downloads.html</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_prepare_data'>prepare_data</span><span class='rparen'>)</span>
+  <span class='ivar'>@local_name</span>    <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hg19.2bit</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@data_url</span>      <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/hg19.2bit</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -262,45 +238,11 @@
   
 </div>
 
-
-  <div id="class_method_details" class="method_details_list">
-    <h2>Class Method Details</h2>
-
-    
-      <div class="method_details first">
-  <h3 class="signature first" id="open-class_method">
-  
-    .<strong>open</strong>  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-4
-5</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/twobit/reference/hg19.rb', line 4</span>
-
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
 
 </div>
 
       <div id="footer">
-  Generated on Wed Jan 11 10:45:31 2023 by
+  Generated on Wed Jan 11 11:05:43 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.2.0).
 </div>
