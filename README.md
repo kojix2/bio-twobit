@@ -111,7 +111,7 @@ tb.soft_masked_blocks("chr1")
 tb.masked? # true / false
 ```
 
-## hg19, hg38, hs1
+## hg19, hg38, hs1...
 
 Some reference genomes are provided as classes in advance. These classes automatically download 2bit files from the UCSC site into a cache directory upon first use.
 
@@ -120,6 +120,8 @@ hg19 = Bio::TwoBit::Hg19.new
 hg38 = Bio::TwoBit::Hg38.new
 hs1  = Bio::TwoBit::Hs1.new
 ```
+
+Adding a new reference file is easy. Add [here](https://github.com/ruby-on-bioc/bio-twobit/blob/main/lib/bio/twobit/references/template.erb) the id of the genome you want to use. Pull requests are welcome.
 
 ## Development
 
