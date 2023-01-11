@@ -103,7 +103,7 @@
 
 <div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="Hg19.html" title="Bio::TwoBit::Hg19 (class)">Hg19</a></span>, <span class='object_link'><a href="Hg38.html" title="Bio::TwoBit::Hg38 (class)">Hg38</a></span>, <span class='object_link'><a href="Hs1.html" title="Bio::TwoBit::Hs1 (class)">Hs1</a></span></p>
+  <p class="children"><span class='object_link'><a href="Hg19.html" title="Bio::TwoBit::Hg19 (class)">Hg19</a></span>, <span class='object_link'><a href="Hg38.html" title="Bio::TwoBit::Hg38 (class)">Hg38</a></span>, <span class='object_link'><a href="Hs1.html" title="Bio::TwoBit::Hs1 (class)">Hs1</a></span>, <span class='object_link'><a href="Mm10.html" title="Bio::TwoBit::Mm10 (class)">Mm10</a></span>, <span class='object_link'><a href="Mm39.html" title="Bio::TwoBit::Mm39 (class)">Mm39</a></span>, <span class='object_link'><a href="Mm9.html" title="Bio::TwoBit::Mm9 (class)">Mm9</a></span></p>
 </div>
 
 
@@ -233,12 +233,14 @@
 
 10
 11
-12</pre>
+12
+13</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/bio/twobit/reference_genome.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='ivar'>@local_name</span> <span class='op'>||=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_basename'>basename</span><span class='lparen'>(</span><span class='ivar'>@data_url</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_prepare_data'>prepare_data</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -314,7 +316,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Jan 11 11:05:43 2023 by
+  Generated on Wed Jan 11 11:43:19 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.2.0).
 </div>
