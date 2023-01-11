@@ -132,4 +132,6 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/ruby-o
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-Some code was forked from red-datasets. https://github.com/red-data-tools/red-datasets
+
+Code from [red-datasets](https://github.com/red-data-tools/red-datasets) is used for automatic file download and caching. (The MIT license)
+
