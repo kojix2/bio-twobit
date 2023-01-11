@@ -121,7 +121,18 @@ hg38 = Bio::TwoBit::Hg38.new
 hs1  = Bio::TwoBit::Hs1.new
 ```
 
-Adding a new reference file is easy. Add [here](https://github.com/ruby-on-bioc/bio-twobit/blob/main/lib/bio/twobit/references/template.erb) the id of the genome you want to use. Pull requests are welcome.
+Adding a new reference genome is easy. Add [here](https://github.com/ruby-on-bioc/bio-twobit/blob/main/lib/bio/twobit/references/template.erb) the id of the genome you want to use. 
+
+```
+git clone https://github.com/ruby-on-bioc/bio-twobit
+vi lib/bio/twobit/references/template.erb # Add your id to ids list.
+ruby lib/bio/twobit/references/template.erb
+rake install
+```
+
+If you want to use 2-bit files from locations other than UCSC, create your own classes [here](https://github.com/ruby-on-bioc/bio-twobit/tree/main/lib/bio/twobit/references).
+
+Pull requests are welcome.
 
 ## Development
 
