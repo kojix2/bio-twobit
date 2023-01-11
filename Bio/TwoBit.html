@@ -95,7 +95,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/bio/twobit.rb<span class="defines">,<br />
-  lib/bio/twobit/version.rb,<br /> ext/bio/twobit/twobit.c</span>
+  lib/bio/twobit/version.rb,<br /> lib/bio/twobit/metadata.rb,<br /> lib/bio/twobit/cache_path.rb,<br /> lib/bio/twobit/downloader.rb,<br /> lib/bio/twobit/reference/hg19.rb,<br /> lib/bio/twobit/references/hg19.rb,<br /> lib/bio/twobit/references/hg38.rb,<br /> lib/bio/twobit/reference_genome.rb,<br /> ext/bio/twobit/twobit.c</span>
 </dd>
   </dl>
   
@@ -112,7 +112,21 @@
 <div class="tags">
   
 
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="TwoBit/ReferenceGenome.html" title="Bio::TwoBit::ReferenceGenome (class)">ReferenceGenome</a></span></p>
 </div>
+<h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="TwoBit/CachePath.html" title="Bio::TwoBit::CachePath (class)">CachePath</a></span>, <span class='object_link'><a href="TwoBit/Downloader.html" title="Bio::TwoBit::Downloader (class)">Downloader</a></span>, <span class='object_link'><a href="TwoBit/Hg19.html" title="Bio::TwoBit::Hg19 (class)">Hg19</a></span>, <span class='object_link'><a href="TwoBit/Hg38.html" title="Bio::TwoBit::Hg38 (class)">Hg38</a></span>, <span class='object_link'><a href="TwoBit/Metadata.html" title="Bio::TwoBit::Metadata (class)">Metadata</a></span>, <span class='object_link'><a href="TwoBit/ReferenceGenome.html" title="Bio::TwoBit::ReferenceGenome (class)">ReferenceGenome</a></span>
+    
+  
+</p>
+
   
     <h2>
       Constant Summary
@@ -131,6 +145,40 @@
 
 
 
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#metadata-instance_method" title="#metadata (instance method)">#<strong>metadata</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute metadata.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
 
 
 
@@ -200,6 +248,28 @@
   <span class="summary_signature">
     
       <a href="#chroms-instance_method" title="#chroms (instance method)">#<strong>chroms</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clear_cache!-instance_method" title="#clear_cache! (instance method)">#<strong>clear_cache!</strong>  &#x21d2; Object </a>
     
 
     
@@ -454,26 +524,28 @@
       <pre class="lines">
 
 
-21
-22
-23
-24
-25
-26
 27
 28
 29
 30
 31
 32
-33</pre>
+33
+34
+35
+36
+37
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_fname'>fname</span><span class='comma'>,</span> <span class='label'>masked:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TwoBit::new() does not take block; use TwoBit::open() instead</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
 
+  <span class='id identifier rubyid_fname'>fname</span> <span class='op'>=</span> <span class='id identifier rubyid_fname'>fname</span><span class='period'>.</span><span class='id identifier rubyid_to_path'>to_path</span> <span class='kw'>if</span> <span class='id identifier rubyid_fname'>fname</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:to_path</span><span class='rparen'>)</span>
   <span class='ivar'>@fname</span> <span class='op'>=</span> <span class='id identifier rubyid_fname'>fname</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_masked'>masked</span>
     <span class='id identifier rubyid_mskd'>mskd</span> <span class='op'>=</span> <span class='int'>1</span>
@@ -490,6 +562,54 @@
 </div>
   
 </div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="metadata-instance_method">
+  
+    #<strong>metadata</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute metadata.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_metadata'>metadata</span>
+  <span class='ivar'>@metadata</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
 
 
   <div id="class_method_details" class="method_details_list">
@@ -511,20 +631,20 @@
       <pre class="lines">
 
 
-9
-10
-11
-12
-13
-14
 15
 16
 17
 18
-19</pre>
+19
+20
+21
+22
+23
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
@@ -585,15 +705,15 @@
       <pre class="lines">
 
 
-52
-53
-54
-55
-56
-57</pre>
+59
+60
+61
+62
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 59</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_bases'>bases</span><span class='lparen'>(</span><span class='id identifier rubyid_chrom'>chrom</span><span class='comma'>,</span> <span class='id identifier rubyid_start'>start</span> <span class='op'>=</span> <span class='int'>0</span><span class='comma'>,</span> <span class='id identifier rubyid_stop'>stop</span> <span class='op'>=</span> <span class='int'>0</span><span class='comma'>,</span> <span class='label'>fraction:</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>negative start position</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_start'>start</span><span class='period'>.</span><span class='id identifier rubyid_negative?'>negative?</span>
@@ -683,6 +803,36 @@ error:
 	rb_raise(rb_eRuntimeError, &quot;Received an error while adding an item to the output hash!&quot;);
 	return Qnil;
 }</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clear_cache!-instance_method">
+  
+    #<strong>clear_cache!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+80
+81
+82</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 80</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_clear_cache!'>clear_cache!</span>
+  <span class='id identifier rubyid_cache_path'>cache_path</span><span class='period'>.</span><span class='id identifier rubyid_remove'>remove</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -845,15 +995,15 @@ twobit_closed_question_mark(VALUE self)
       <pre class="lines">
 
 
-59
-60
-61
-62
-63
-64</pre>
+66
+67
+68
+69
+70
+71</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_hard_masked_blocks'>hard_masked_blocks</span><span class='lparen'>(</span><span class='id identifier rubyid_chrom'>chrom</span><span class='comma'>,</span> <span class='id identifier rubyid_start'>start</span> <span class='op'>=</span> <span class='int'>0</span><span class='comma'>,</span> <span class='id identifier rubyid_stop'>stop</span> <span class='op'>=</span> <span class='int'>0</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>negative start position</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_start'>start</span><span class='period'>.</span><span class='id identifier rubyid_negative?'>negative?</span>
@@ -1077,12 +1227,12 @@ error:
       <pre class="lines">
 
 
-39
-40
-41</pre>
+46
+47
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_masked?'>masked?</span>
   <span class='ivar'>@masked</span>
@@ -1107,12 +1257,12 @@ error:
       <pre class="lines">
 
 
-35
-36
-37</pre>
+42
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_path'>path</span>
   <span class='ivar'>@fname</span>
@@ -1161,15 +1311,15 @@ error:
       <pre class="lines">
 
 
-45
-46
-47
-48
-49
-50</pre>
+52
+53
+54
+55
+56
+57</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 52</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sequence'>sequence</span><span class='lparen'>(</span><span class='id identifier rubyid_chrom'>chrom</span><span class='comma'>,</span> <span class='id identifier rubyid_start'>start</span> <span class='op'>=</span> <span class='int'>0</span><span class='comma'>,</span> <span class='id identifier rubyid_stop'>stop</span> <span class='op'>=</span> <span class='int'>0</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>negative start position</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_start'>start</span><span class='period'>.</span><span class='id identifier rubyid_negative?'>negative?</span>
@@ -1219,15 +1369,15 @@ error:
       <pre class="lines">
 
 
-66
-67
-68
-69
-70
-71</pre>
+73
+74
+75
+76
+77
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/bio/twobit.rb', line 73</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_soft_masked_blocks'>soft_masked_blocks</span><span class='lparen'>(</span><span class='id identifier rubyid_chrom'>chrom</span><span class='comma'>,</span> <span class='id identifier rubyid_start'>start</span> <span class='op'>=</span> <span class='int'>0</span><span class='comma'>,</span> <span class='id identifier rubyid_stop'>stop</span> <span class='op'>=</span> <span class='int'>0</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>negative start position</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_start'>start</span><span class='period'>.</span><span class='id identifier rubyid_negative?'>negative?</span>
@@ -1245,7 +1395,7 @@ error:
 </div>
 
       <div id="footer">
-  Generated on Wed Jan 11 03:35:06 2023 by
+  Generated on Wed Jan 11 10:04:57 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.2.0).
 </div>
