@@ -25,10 +25,14 @@ module Bio
         file
       end
 
+      # Here, const_missing is used instead of autoload.
+
       def const_missing(name)
+        # prevents const_get from being called recursively many times.
         @missing_const ||= []
         super if @missing_const.include? name
         @missing_const << name
+
         path = File.join(__dir__, "twobit/references", "#{name.to_s.downcase}.rb")
         if File.exist?(path)
           require path
