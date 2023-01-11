@@ -101,5 +101,11 @@ module Bio
     autoload :Hg19, "bio/twobit/references/hg19"
     autoload :Hg38, "bio/twobit/references/hg38"
     autoload :Hs1,  "bio/twobit/references/hs1"
+    autoload :Mm9,  "bio/twobit/references/mm9"
+    autoload :Mm10, "bio/twobit/references/mm10"
+    autoload :Mm39, "bio/twobit/references/mm39"
+    autoload :DanRer10, "bio/twobit/references/danRer10"
+    autoload :DanRer11, "bio/twobit/references/danRer11"
+    autoload :Dm6, "bio/twobit/references/dm6"
   end
 end
