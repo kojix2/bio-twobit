@@ -8,6 +8,7 @@ module Bio
       end
 
       def initialize(**kwargs)
+        @local_name ||= File.basename(@data_url)
         super(prepare_data, **kwargs)
       end
 
