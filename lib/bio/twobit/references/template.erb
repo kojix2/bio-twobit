@@ -15,7 +15,7 @@ ids = %w[
 template = DATA.read
 ids.each do |id|
   File.write(
-    File.join(__dir__, "#{id}.rb"),
+    File.join(__dir__, "#{id.downcase}.rb"),
     ERB.new(template).result(binding)
   )
 end
@@ -25,7 +25,7 @@ require_relative "../reference_genome"
 
 module Bio
   class TwoBit
-    class <%= id.capitalize %> < ReferenceGenome
+    class <%= id[0].upcase + id[1..-1] %> < ReferenceGenome
       def initialize(**kwargs)
         @metadata      = Metadata.new
         @metadata.id   = "<%= id %>"

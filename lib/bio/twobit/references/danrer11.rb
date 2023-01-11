@@ -2,7 +2,7 @@ require_relative "../reference_genome"
 
 module Bio
   class TwoBit
-    class Danrer11 < ReferenceGenome
+    class DanRer11 < ReferenceGenome
       def initialize(**kwargs)
         @metadata      = Metadata.new
         @metadata.id   = "danRer11"
