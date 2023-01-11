@@ -1,11 +1,17 @@
 # frozen_string_literal: true
 
+require "pathname"
 require_relative "twobit/version"
 require_relative "twobit/twobit"
+require_relative "twobit/cache_path"
+require_relative "twobit/downloader"
+require_relative "twobit/metadata"
 
 module Bio
   # Reader for .2bit files (i.e., from UCSC genome browser)
   class TwoBit
+    attr_reader :metadata
+
     def self.open(*args, **kwargs)
       file = new(*args, **kwargs)
       return file unless block_given?
@@ -21,6 +27,7 @@ module Bio
     def initialize(fname, masked: false)
       raise "TwoBit::new() does not take block; use TwoBit::open() instead" if block_given?
 
+      fname = fname.to_path if fname.respond_to?(:to_path)
       @fname = fname
       if masked
         mskd = 1
@@ -69,5 +76,28 @@ module Bio
 
       soft_masked_blocks_raw(chrom, start, stop)
     end
+
+    def clear_cache!
+      cache_path.remove
+    end
+
+    private
+
+    def cache_dir_path
+      cache_path.base_dir
+    end
+
+    def cache_path
+      @cache_path ||= CachePath.new(@metadata.id)
+    end
+
+    def download(output_path, url)
+      downloader = Downloader.new(url)
+      downloader.download(output_path)
+    end
+
+    autoload :Hg19, "bio/twobit/references/hg19"
+    autoload :Hg38, "bio/twobit/references/hg38"
+    autoload :Hs1, "bio/twobit/references/hs1"
   end
 end
