@@ -120,7 +120,7 @@
 <span class='comment'># [[0, 10000], [207666, 257666], [297968, 347968], [535988, 585988]]
 </span></code></pre>
 
-<p>The 2-bit file must be closed explicitly. Alternatively, you can use a block. (If you forget to close the file, it will probably be closed by GC).</p>
+<p>The 2-bit file must be closed explicitly. Alternatively, you can use a block. Even if it is not closed, it will probably be closed by GC and there will be no problem. But this is not guaranteed.</p>
 
 <pre class="code ruby"><code class="ruby"><span class='comment'># Explicitly close the file.
 </span><span class='id identifier rubyid_tb'>tb</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Bio.html" title="Bio (module)">Bio</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit.html" title="Bio::TwoBit (class)">TwoBit</a></span></span><span class='period'>.</span><span class='id identifier rubyid_open'><span class='object_link'><a href="Bio/TwoBit.html#open-class_method" title="Bio::TwoBit.open (method)">open</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>test/fixtures/foo.2bit</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -166,7 +166,7 @@ If so, please feel free to contact us @kojix2.
 </div></div>
 
       <div id="footer">
-  Generated on Thu Jan  5 11:14:49 2023 by
+  Generated on Wed Jan 11 02:20:37 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.2.0).
 </div>
