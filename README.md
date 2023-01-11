@@ -111,6 +111,16 @@ tb.soft_masked_blocks("chr1")
 tb.masked? # true / false
 ```
 
+## hg19, hg38, hs1
+
+Some reference genomes are provided as classes in advance. These classes automatically download 2bit files from the UCSC site into a cache directory upon first use.
+
+```ruby
+hg19 = Bio::TwoBit::Hg19.new
+hg38 = Bio::TwoBit::Hg38.new
+hs1  = Bio::TwoBit::Hs1.new
+```
+
 ## Development
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/ruby-on-bioc/bio-twobit.
@@ -122,3 +132,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/ruby-o
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+Some code was forked from red-datasets. https://github.com/red-data-tools/red-datasets
