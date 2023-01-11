@@ -1,0 +1,36 @@
+require "erb"
+
+ids = %w[
+  hg19
+  hg38
+  hs1
+  mm9
+  mm10
+  mm39
+]
+
+template = DATA.read
+ids.each do |id|
+  File.write(
+    File.join(__dir__, "#{id}.rb"),
+    ERB.new(template).result(binding)
+  )
+end
+
+__END__
+require_relative "../reference_genome"
+
+module Bio
+  class TwoBit
+    class <%= id.capitalize %> < ReferenceGenome
+      def initialize(**kwargs)
+        @metadata      = Metadata.new
+        @metadata.id   = "<%= id %>"
+        @metadata.name = "<%= id %>"
+        @metadata.url  = "https://hgdownload.soe.ucsc.edu/downloads.html"
+        @data_url      = "https://hgdownload.soe.ucsc.edu/goldenPath/<%= id %>/bigZips/<%= id %>.2bit"
+        super(**kwargs)
+      end
+    end
+  end
+end
