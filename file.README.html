@@ -58,7 +58,7 @@
       </div>
 
       <div id="content"><div id='filecontents'>
-<h1 id="label-bio-twobit">bio-twobit</h1>
+<h1 id="label-bio-twobit+-+A+Ruby+interface+to+2bit+files">bio-twobit - A Ruby interface to 2bit files</h1>
 
 <p><a href="https://badge.fury.io/rb/bio-twobit"><img src="https://badge.fury.io/rb/bio-twobit.svg"></a> <a href="https://github.com/ruby-on-bioc/bio-twobit/actions/workflows/ci.yml"><img src="https://github.com/ruby-on-bioc/bio-twobit/actions/workflows/ci.yml/badge.svg"></a> <a href="https://rubydoc.info/gems/bio-twobit"><img src="https://img.shields.io/badge/docs-stable-blue.svg"></a> <a href="https://zenodo.org/badge/latestdoi/436454379"><img src="https://zenodo.org/badge/436454379.svg"></a></p>
 
@@ -71,18 +71,12 @@
 
 <p>Linux and macOS are supported. Windows is currently not supported.</p>
 
-<h2 id="label-Usage">Usage</h2>
-
-<p>Downlaod BSgenome.Hsapiens.UCSC.hg38</p>
-
-<pre class="code ruby"><code class="ruby">wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.2bit
-</code></pre>
-
-<h3 id="label-Quick+Start">Quick Start</h3>
+<h3 id="label-Usage">Usage</h3>
 
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>bio/twobit</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='id identifier rubyid_hg38'>hg38</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Bio.html" title="Bio (module)">Bio</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit.html" title="Bio::TwoBit (class)">TwoBit</a></span></span><span class='period'>.</span><span class='id identifier rubyid_open'><span class='object_link'><a href="Bio/TwoBit.html#open-class_method" title="Bio::TwoBit.open (method)">open</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hg38.2bit</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='comment'># hg38 = Bio::TwoBit.open(&quot;hg38.2bit&quot;)
+</span><span class='id identifier rubyid_hg38'>hg38</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Bio.html" title="Bio (module)">Bio</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit.html" title="Bio::TwoBit (class)">TwoBit</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit/Hg38.html" title="Bio::TwoBit::Hg38 (class)">Hg38</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Bio/TwoBit/Hg38.html#initialize-instance_method" title="Bio::TwoBit::Hg38#initialize (method)">new</a></span></span>
 
 <span class='id identifier rubyid_hg38'>hg38</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span>
 <span class='comment'># &quot;hg38.2bit&quot;
@@ -169,7 +163,7 @@
 <span class='id identifier rubyid_hs1'>hs1</span>  <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Bio.html" title="Bio (module)">Bio</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit.html" title="Bio::TwoBit (class)">TwoBit</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bio/TwoBit/Hs1.html" title="Bio::TwoBit::Hs1 (class)">Hs1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Bio/TwoBit/Hs1.html#initialize-instance_method" title="Bio::TwoBit::Hs1#initialize (method)">new</a></span></span>
 </code></pre>
 
-<p>Adding a new reference genome is easy. Add <a href="https://github.com/ruby-on-bioc/bio-twobit/blob/main/lib/bio/twobit/references/template.erb">here</a> the id of the genome you want to use.</p>
+<p>Adding a new reference genome is easy. Add the id of the genome you want to use <a href="https://github.com/ruby-on-bioc/bio-twobit/blob/main/lib/bio/twobit/references/template.erb">here</a>.</p>
 
 <pre class="code ruby"><code class="ruby">git clone https://github.com/ruby-on-bioc/bio-twobit
 vi lib/bio/twobit/references/template.erb # Add your id to ids list.
@@ -198,9 +192,9 @@ If so, please feel free to contact us @kojix2.
 </div></div>
 
       <div id="footer">
-  Generated on Thu Jan 12 10:30:03 2023 by
+  Generated on Wed Mar  8 06:42:01 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.28 (ruby-3.2.0).
+  0.9.28 (ruby-3.2.1).
 </div>
 
     </div>
