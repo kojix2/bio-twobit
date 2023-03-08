@@ -1,4 +1,4 @@
-# bio-twobit
+# bio-twobit - A Ruby interface to 2bit files
 
 [![Gem Version](https://badge.fury.io/rb/bio-twobit.svg)](https://badge.fury.io/rb/bio-twobit)
 [![test](https://github.com/ruby-on-bioc/bio-twobit/actions/workflows/ci.yml/badge.svg)](https://github.com/ruby-on-bioc/bio-twobit/actions/workflows/ci.yml)
@@ -16,20 +16,13 @@ gem install bio-twobit
 Linux and macOS are supported.
 Windows is currently not supported.
 
-## Usage
-
-Downlaod BSgenome.Hsapiens.UCSC.hg38
-
-```sh
-wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.2bit
-```
-
-### Quick Start
+### Usage
 
 ```ruby
 require 'bio/twobit'
 
-hg38 = Bio::TwoBit.open("hg38.2bit")
+# hg38 = Bio::TwoBit.open("hg38.2bit")
+hg38 = Bio::TwoBit::Hg38.new
 
 hg38.path
 # "hg38.2bit"
@@ -121,7 +114,7 @@ hg38 = Bio::TwoBit::Hg38.new
 hs1  = Bio::TwoBit::Hs1.new
 ```
 
-Adding a new reference genome is easy. Add [here](https://github.com/ruby-on-bioc/bio-twobit/blob/main/lib/bio/twobit/references/template.erb) the id of the genome you want to use. 
+Adding a new reference genome is easy. Add the id of the genome you want to use [here](https://github.com/ruby-on-bioc/bio-twobit/blob/main/lib/bio/twobit/references/template.erb). 
 
 ```
 git clone https://github.com/ruby-on-bioc/bio-twobit
@@ -147,4 +140,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/ruby-o
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 Code from [Red Datasets](https://github.com/red-data-tools/red-datasets) is used for automatic file download and caching. (The MIT license)
-
