@@ -1,11 +1,16 @@
-# bio-twobit - A Ruby interface to 2bit files
+# bio-twobit
 
 [![Gem Version](https://badge.fury.io/rb/bio-twobit.svg)](https://badge.fury.io/rb/bio-twobit)
 [![test](https://github.com/ruby-on-bioc/bio-twobit/actions/workflows/ci.yml/badge.svg)](https://github.com/ruby-on-bioc/bio-twobit/actions/workflows/ci.yml)
 [![dics](https://img.shields.io/badge/docs-stable-blue.svg)](https://rubydoc.info/gems/bio-twobit)
 [![DOI](https://zenodo.org/badge/436454379.svg)](https://zenodo.org/badge/latestdoi/436454379)
 
+Bio::TwoBit is a Ruby interface to 2bit files.
+
 Ruby bindings to [lib2bit](https://github.com/dpryan79/lib2bit) / [py2bit](https://github.com/deeptools/py2bit).
+
+
+2bit files are used to store and index DNA sequences, usually of entire reference genomes. [The 2bit format](https://genome.ucsc.edu/goldenPath/help/twoBit.html) is a compact binary representation of DNA sequences that is used by the UCSC Genome Browser.
 
 ## Installation
 
@@ -49,7 +54,7 @@ hg38.sequence("chr1", 50000, 50050)
 # "AAACAGGTTAATCGCCACGACATAGTAGTATTTAGAGTTACTAGTAAGCC" # length 50
 ```
 
-* The first number is the **(0-based)** position on the chromosome/contig where the sequence should begin. 
+* The first number is the **(0-based)** position on the chromosome/contig where the sequence should begin.
 * The second number is the **(1-based)** position on the chromosome where the sequence should end.
 
 ```ruby
