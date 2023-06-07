@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = "A ruby library for accessing 2bit files"
   spec.description   = "This is a Ruby binding for lib2bit(https://github.com/dpryan79/lib2bit), " \
                        "which provides high-speed access to genomic data in 2bit file format."
-  spec.homepage      = "https://github.com/ruby-on-bioc/bio-twobit"
+  spec.homepage      = "https://github.com/kojix2/bio-twobit"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
 

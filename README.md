@@ -1,7 +1,7 @@
 # bio-twobit
 
 [![Gem Version](https://badge.fury.io/rb/bio-twobit.svg)](https://badge.fury.io/rb/bio-twobit)
-[![test](https://github.com/ruby-on-bioc/bio-twobit/actions/workflows/ci.yml/badge.svg)](https://github.com/ruby-on-bioc/bio-twobit/actions/workflows/ci.yml)
+[![test](https://github.com/kojix2/bio-twobit/actions/workflows/ci.yml/badge.svg)](https://github.com/kojix2/bio-twobit/actions/workflows/ci.yml)
 [![dics](https://img.shields.io/badge/docs-stable-blue.svg)](https://rubydoc.info/gems/bio-twobit)
 [![DOI](https://zenodo.org/badge/436454379.svg)](https://zenodo.org/badge/latestdoi/436454379)
 
@@ -119,22 +119,22 @@ hg38 = Bio::TwoBit::Hg38.new
 hs1  = Bio::TwoBit::Hs1.new
 ```
 
-Adding a new reference genome is easy. Add the id of the genome you want to use [here](https://github.com/ruby-on-bioc/bio-twobit/blob/main/lib/bio/twobit/references/template.erb). 
+Adding a new reference genome is easy. Add the id of the genome you want to use [here](https://github.com/kojix2/bio-twobit/blob/main/lib/bio/twobit/references/template.erb). 
 
 ```
-git clone https://github.com/ruby-on-bioc/bio-twobit
+git clone https://github.com/kojix2/bio-twobit
 vi lib/bio/twobit/references/template.erb # Add your id to ids list.
 ruby lib/bio/twobit/references/template.erb
 rake install
 ```
 
-If you want to use 2-bit files from locations other than UCSC, create your own classes [here](https://github.com/ruby-on-bioc/bio-twobit/tree/main/lib/bio/twobit/references).
+If you want to use 2-bit files from locations other than UCSC, create your own classes [here](https://github.com/kojix2/bio-twobit/tree/main/lib/bio/twobit/references).
 
 Pull requests are welcome.
 
 ## Development
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/ruby-on-bioc/bio-twobit.
+Bug reports and pull requests are welcome on GitHub at https://github.com/kojix2/bio-twobit.
 
     Do you need commit rights to my repository?
     Do you want to get admin rights and take over the project?
