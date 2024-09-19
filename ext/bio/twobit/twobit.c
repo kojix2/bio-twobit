@@ -250,8 +250,8 @@ twobit_sequence(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
 	TwoBit *tb;
 
 	ch = StringValueCStr(chrom);
-	startl = NUM2UINT32(rbstart);
-	endl = NUM2UINT32(rbend);
+	startl = NUM2ULONG(rbstart);
+	endl = NUM2ULONG(rbend);
 	tb = getTwoBit(self);
 
 	if (!tb)
