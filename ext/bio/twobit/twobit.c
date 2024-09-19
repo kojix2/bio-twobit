@@ -48,12 +48,12 @@ static void TwoBit_free(void *ptr);
 static size_t TwoBit_memsize(const void *ptr);
 
 static const rb_data_type_t TwoBit_type = {
-	.wrap_struct_name = "TwoBit",
-	.function = {
-		.dfree = TwoBit_free,
-		.dsize = TwoBit_memsize,
-	},
-	.flags = RUBY_TYPED_FREE_IMMEDIATELY,
+		.wrap_struct_name = "TwoBit",
+		.function = {
+				.dfree = TwoBit_free,
+				.dsize = TwoBit_memsize,
+		},
+		.flags = RUBY_TYPED_FREE_IMMEDIATELY,
 };
 
 static void
