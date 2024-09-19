@@ -277,8 +277,14 @@ twobit_sequence(VALUE self, VALUE chrom, VALUE rbstart, VALUE rbend)
 	start = (uint32_t)startl;
 
 	str = twobitSequence(tb, ch, start, end);
-
-	return rb_str_new2(str);
+	if (!str)
+	{
+		rb_raise(rb_eRuntimeError, "Failed to retrieve the sequence for %s:%u-%u", ch, start, end);
+		return Qnil;
+	}
+	VALUE result = rb_str_new2(str);
+	free(str);
+	return result;
 }
 
 static VALUE
