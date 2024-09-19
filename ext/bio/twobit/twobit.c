@@ -100,7 +100,6 @@ twobit_init(VALUE klass, VALUE fpath, VALUE storeMasked)
 	tb = twobitOpen(path, mask);
 	if (!tb)
 	{
-		twobitClose(tb);
 		rb_raise(rb_eRuntimeError, "Could not open file %s", path);
 		return Qnil;
 	}
