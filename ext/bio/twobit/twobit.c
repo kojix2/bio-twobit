@@ -295,6 +295,7 @@ twobit_bases(VALUE self, VALUE chrom, VALUE start, VALUE end, VALUE fraction)
 	TwoBit *tb;
 	void *o = NULL;
 	VALUE val, hash;
+	const char *bases[4] = {"A", "C", "T", "G"};
 
 	tb = getTwoBit(self);
 	if (!tb)
@@ -317,48 +318,20 @@ twobit_bases(VALUE self, VALUE chrom, VALUE start, VALUE end, VALUE fraction)
 
 	hash = rb_hash_new();
 
-	if (fr)
+	for (int i = 0; i < 4; i++)
 	{
-		val = DBL2NUM(((double *)o)[0]);
+		if (fr)
+		{
+			val = DBL2NUM(((double *)o)[i]);
+		}
+		else
+		{
+			val = UINT32_2NUM(((uint32_t *)o)[i]);
+		}
+		rb_hash_aset(hash, rb_str_new2(bases[i]), val);
 	}
-	else
-	{
-		val = UINT32_2NUM(((uint32_t *)o)[0]);
-	}
-	rb_hash_aset(hash, rb_str_new2("A"), val);
-
-	if (fr)
-	{
-		val = DBL2NUM(((double *)o)[1]);
-	}
-	else
-	{
-		val = UINT32_2NUM(((uint32_t *)o)[1]);
-	}
-	rb_hash_aset(hash, rb_str_new2("C"), val);
-
-	if (fr)
-	{
-		val = DBL2NUM(((double *)o)[2]);
-	}
-	else
-	{
-		val = UINT32_2NUM(((uint32_t *)o)[2]);
-	}
-	rb_hash_aset(hash, rb_str_new2("T"), val);
-
-	if (fr)
-	{
-		val = DBL2NUM(((double *)o)[3]);
-	}
-	else
-	{
-		val = UINT32_2NUM(((uint32_t *)o)[3]);
-	}
-	rb_hash_aset(hash, rb_str_new2("G"), val);
 
 	free(o);
-
 	return hash;
 }
 
