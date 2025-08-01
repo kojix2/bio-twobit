@@ -2,7 +2,8 @@
 
 [![Gem Version](https://badge.fury.io/rb/bio-twobit.svg)](https://badge.fury.io/rb/bio-twobit)
 [![test](https://github.com/kojix2/bio-twobit/actions/workflows/ci.yml/badge.svg)](https://github.com/kojix2/bio-twobit/actions/workflows/ci.yml)
-[![dics](https://img.shields.io/badge/docs-stable-blue.svg)](https://rubydoc.info/gems/bio-twobit)
+[![docs](https://img.shields.io/badge/docs-stable-blue.svg)](https://rubydoc.info/gems/bio-twobit)
+[![Lines of Code](https://img.shields.io/endpoint?url=https%3A%2F%2Ftokei.kojix2.net%2Fbadge%2Fgithub%2Fkojix2%2Fbio-twobit%2Flines)](https://tokei.kojix2.net/github/kojix2/bio-twobit)
 [![DOI](https://zenodo.org/badge/436454379.svg)](https://zenodo.org/badge/latestdoi/436454379)
 
 Bio::TwoBit is a Ruby interface to 2bit files.
