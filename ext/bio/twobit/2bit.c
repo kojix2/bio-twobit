@@ -515,13 +515,13 @@ error:
             for(i=0; i<tb->hdr->nChroms; i++) {
                 if(idx->nBlockStart[i]) free(idx->nBlockStart[i]);
             }
-            free(idx->nBlockStart[i]);
+            free(idx->nBlockStart);
         }
         if(idx->nBlockSizes) {
             for(i=0; i<tb->hdr->nChroms; i++) {
                 if(idx->nBlockSizes[i]) free(idx->nBlockSizes[i]);
             }
-            free(idx->nBlockSizes[i]);
+            free(idx->nBlockSizes);
         }
 
         if(idx->maskBlockCount) free(idx->maskBlockCount);
@@ -529,13 +529,13 @@ error:
             for(i=0; i<tb->hdr->nChroms; i++) {
                 if(idx->maskBlockStart[i]) free(idx->maskBlockStart[i]);
             }
-            free(idx->maskBlockStart[i]);
+            free(idx->maskBlockStart);
         }
         if(idx->maskBlockSizes) {
             for(i=0; i<tb->hdr->nChroms; i++) {
                 if(idx->maskBlockSizes[i]) free(idx->maskBlockSizes[i]);
             }
-            free(idx->maskBlockSizes[i]);
+            free(idx->maskBlockSizes);
         }
 
         if(idx->offset) free(idx->offset);
