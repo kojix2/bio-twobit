@@ -711,12 +711,13 @@ TwoBit* twobitOpen(char *fname, int storeMasked) {
     fd = fileno(tb->fp);
     if(fstat(fd, &fs) == 0) {
         tb->sz = (uint64_t) fs.st_size;
-        tb->data = mmap(NULL, fs.st_size, PROT_READ, MAP_SHARED, fd, 0);
-        if(tb->data) {
-            if(madvise(tb->data, fs.st_size, MADV_RANDOM) != 0) {
-                munmap(tb->data, fs.st_size);
-                tb->data = NULL;
-            }
+        void *map = mmap(NULL, fs.st_size, PROT_READ, MAP_SHARED, fd, 0);
+        if(map != MAP_FAILED) {
+            tb->data = map;
+            /* madvise is an optional optimization; ignore failures */
+            madvise(tb->data, fs.st_size, MADV_RANDOM);
+        } else {
+            tb->data = NULL; /* mmap failed */
         }
     }
 
