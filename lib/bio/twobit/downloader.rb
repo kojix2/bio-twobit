@@ -13,6 +13,17 @@ module Bio
     class Downloader
       class TooManyRedirects < StandardError; end
 
+      DEBUG_ENV_KEY = "BIO_TWOBIT_DEBUG".freeze
+
+      def debug?
+        ENV[DEBUG_ENV_KEY] == "1"
+      end
+
+      def debug_log(msg)
+        return unless debug?
+        $stderr.puts("[twobit/downloader] #{msg}")
+      end
+
       def initialize(url)
         url = if url.is_a?(URI::Generic)
                 url.dup
@@ -26,6 +37,7 @@ module Bio
       end
 
       def download(output_path)
+        debug_log("download start: url=#{@url} -> #{output_path}")
         return if output_path.exist?
 
         output_path.parent.mkpath
@@ -39,9 +51,11 @@ module Bio
         if partial_output_path.exist?
           start = partial_output_path.size
           headers["Range"] = "bytes=#{start}-"
+          debug_log("resume from offset=#{start} (Range=#{headers["Range"]})")
         end
 
         start_http(@url, headers) do |response|
+          debug_log("response: code=#{response.code} class=#{response.class} content_length=#{response.content_length.inspect}")
           if response.is_a?(Net::HTTPPartialContent)
             mode = "ab"
           else
@@ -66,6 +80,7 @@ module Bio
           end
         end
         FileUtils.mv(partial_output_path, output_path)
+        debug_log("download done: path=#{output_path} size=#{output_path.size} bytes")
       rescue TooManyRedirects => e
         last_url = e.message[/\Atoo many redirections: (.+)\z/, 1]
         raise TooManyRedirects, "too many redirections: #{@url} .. #{last_url}"
@@ -74,25 +89,36 @@ module Bio
       private def start_http(url, headers, limit = 10, &block)
         raise TooManyRedirects, "too many redirections: #{url}" if limit == 0
 
+        debug_log("HTTP start: url=#{url} limit=#{limit}")
+
         http = Net::HTTP.new(url.hostname, url.port)
         # http.set_debug_output($stderr)
         http.use_ssl = (url.scheme == "https")
+        # Make timeouts explicit for debugging purposes
+        http.open_timeout = 15
+        http.read_timeout = 300
+        debug_log("HTTP config: use_ssl=#{http.use_ssl?} host=#{url.hostname} port=#{url.port} open_timeout=#{http.open_timeout} read_timeout=#{http.read_timeout}")
         http.start do
           path = url.path
           path += "?#{url.query}" if url.query
           request = Net::HTTP::Get.new(path, headers)
+           debug_log("request: path=#{path} headers=#{headers}")
           http.request(request) do |response|
             case response
             when Net::HTTPSuccess, Net::HTTPPartialContent
+              debug_log("success: code=#{response.code}")
               return block.call(response)
             when Net::HTTPRedirection
-              url = URI.parse(response[:location])
-              warn "Redirect to #{url}"
+              location = response[:location]
+              new_url = URI.join(url.to_s, location)
+              debug_log("redirect: #{url} -> #{new_url} (remaining=#{limit - 1})")
+              url = new_url
               return start_http(url, headers, limit - 1, &block)
             else
               message = response.code
               message += ": #{response.message}" if response.message and !response.message.empty?
               message += ": #{url}"
+              debug_log("error: #{message}")
               raise response.error_type.new(message, response)
             end
           end
