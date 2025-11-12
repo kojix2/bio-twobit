@@ -318,7 +318,7 @@ void *twobitBasesWorker(TwoBit *tb, uint32_t tid, uint32_t start, uint32_t end, 
                 if(start + i >= maskStart && start + i + 4 - offset < maskEnd) {
                     //iff we're fully in an N block then jump
                     i = maskEnd - start;
-                    getMask(tb, tid, i, end, &maskIdx, &maskStart, &maskEnd);
+                    getMask(tb, tid, start + i, end, &maskIdx, &maskStart, &maskEnd);
                     offset = (start + i) % 4;
                     j = i / 4;
                     mask = getByteMaskFromOffset(offset);
@@ -334,7 +334,7 @@ void *twobitBasesWorker(TwoBit *tb, uint32_t tid, uint32_t start, uint32_t end, 
                 if(mask & 4 && (foo + 1 >= maskStart && foo + 1 < maskEnd)) mask -= 4;
                 if(mask & 8 && (foo >= maskStart && foo < maskEnd)) mask -= 8;
                 if(foo + 4 > maskEnd) {
-                    getMask(tb, tid, i, end, &maskIdx, &maskStart, &maskEnd);
+                    getMask(tb, tid, start + i, end, &maskIdx, &maskStart, &maskEnd);
                     continue;
                 }
             }
