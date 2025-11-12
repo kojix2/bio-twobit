@@ -312,7 +312,7 @@ void *twobitBasesWorker(TwoBit *tb, uint32_t tid, uint32_t start, uint32_t end, 
 
     while(i < len) {
         // Check if we need to jump
-        if(maskIdx != -1 && start + i + 4 >= maskStart) {
+        if(maskIdx != (uint32_t)-1 && start + i + 4 >= maskStart) {
             if(start + i >= maskStart || start + i + 4 - offset > maskStart) {
                 //Jump iff the whole byte is inside an N block
                 if(start + i >= maskStart && start + i + 4 - offset < maskEnd) {
