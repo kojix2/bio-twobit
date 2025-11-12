@@ -205,15 +205,17 @@ error:
 */
 char *twobitSequence(TwoBit *tb, char *chrom, uint32_t start, uint32_t end) {
     uint32_t i, tid=0;
+    int found = 0;
 
     //Get the chromosome ID
     for(i=0; i<tb->hdr->nChroms; i++) {
         if(strcmp(tb->cl->chrom[i], chrom) == 0) {
             tid = i;
+            found = 1;
             break;
         }
     }
-    if(tid == 0 && strcmp(tb->cl->chrom[i], chrom) != 0) return NULL;
+    if(!found) return NULL;
 
     //Get the start/end if not specified
     if(start == end && end == 0) {
@@ -398,16 +400,18 @@ error:
 
 void *twobitBases(TwoBit *tb, char *chrom, uint32_t start, uint32_t end, int fraction) {
     uint32_t tid = 0, i;
+    int found = 0;
 
     //Get the chromosome ID
     for(i=0; i<tb->hdr->nChroms; i++) {
         if(strcmp(tb->cl->chrom[i], chrom) == 0) {
             tid = i;
+            found = 1;
             break;
         }
     }
 
-    if(tid == 0 && strcmp(tb->cl->chrom[i], chrom) != 0) return NULL;
+    if(!found) return NULL;
 
     //Get the start/end if not specified
     if(start == end && end == 0) {
