@@ -18,7 +18,8 @@ uint64_t twobitTell(TwoBit *tb);
 */
 size_t twobitRead(void *data, size_t sz, size_t nmemb, TwoBit *tb) {
     if(tb->data) {
-        if(memcpy(data, tb->data + tb->offset, nmemb * sz) == NULL) return 0;
+        // tb->data is a void*, so perform byte-wise pointer arithmetic via a char* cast
+        if(memcpy(data, (const char*)tb->data + tb->offset, nmemb * sz) == NULL) return 0;
         tb->offset += nmemb * sz;
         return nmemb;
     } else {
