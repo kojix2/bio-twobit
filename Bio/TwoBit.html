@@ -6,13 +6,13 @@
 <title>
   Class: Bio::TwoBit
   
-    &mdash; Documentation by YARD 0.9.37
+    &mdash; Documentation by YARD 0.9.44
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "Bio::TwoBit";
@@ -27,6 +27,8 @@
 
   </head>
   <body>
+    <div id="main_progress" aria-hidden="true"></div>
+
     <div class="nav_wrap">
       <iframe id="nav" src="../class_list.html?1"></iframe>
       <div id="resizer"></div>
@@ -94,8 +96,9 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/bio/twobit.rb<span class="defines">,<br />
-  lib/bio/twobit/version.rb,<br /> lib/bio/twobit/metadata.rb,<br /> lib/bio/twobit/cache_path.rb,<br /> lib/bio/twobit/downloader.rb,<br /> lib/bio/twobit/references/cb3.rb,<br /> lib/bio/twobit/references/ci2.rb,<br /> lib/bio/twobit/references/dm6.rb,<br /> lib/bio/twobit/references/dp3.rb,<br /> lib/bio/twobit/references/fr2.rb,<br /> lib/bio/twobit/references/hs1.rb,<br /> lib/bio/twobit/references/mm9.rb,<br /> lib/bio/twobit/references/rn6.rb,<br /> lib/bio/twobit/references/ce11.rb,<br /> lib/bio/twobit/references/hg19.rb,<br /> lib/bio/twobit/references/hg38.rb,<br /> lib/bio/twobit/references/mm10.rb,<br /> lib/bio/twobit/references/mm39.rb,<br /> lib/bio/twobit/reference_genome.rb,<br /> lib/bio/twobit/references/caepb2.rb,<br /> lib/bio/twobit/references/ailmel1.rb,<br /> lib/bio/twobit/references/allmis1.rb,<br /> lib/bio/twobit/references/anocar2.rb,<br /> lib/bio/twobit/references/anogam3.rb,<br /> lib/bio/twobit/references/apimel2.rb,<br /> lib/bio/twobit/references/aplcal1.rb,<br /> lib/bio/twobit/references/aptman1.rb,<br /> lib/bio/twobit/references/aquchr2.rb,<br /> lib/bio/twobit/references/balacu1.rb,<br /> lib/bio/twobit/references/bostau7.rb,<br /> lib/bio/twobit/references/braflo1.rb,<br /> lib/bio/twobit/references/caejap1.rb,<br /> lib/bio/twobit/references/caerem3.rb,<br /> lib/bio/twobit/references/caljac4.rb,<br /> lib/bio/twobit/references/calmil1.rb,<br /> lib/bio/twobit/references/canfam4.rb,<br /> lib/bio/twobit/references/canfam6.rb,<br /> lib/bio/twobit/references/cersim1.rb,<br /> lib/bio/twobit/references/chlsab2.rb,<br /> lib/bio/twobit/references/chohof1.rb,<br /> lib/bio/twobit/references/chrpic1.rb,<br /> lib/bio/twobit/references/dasnov3.rb,<br /> lib/bio/twobit/references/dipord1.rb,<br /> lib/bio/twobit/references/droana2.rb,<br /> lib/bio/twobit/references/droere1.rb,<br /> lib/bio/twobit/references/drogri1.rb,<br /> lib/bio/twobit/references/dromoj2.rb,<br /> lib/bio/twobit/references/droper1.rb,<br /> lib/bio/twobit/references/drosec1.rb,<br /> lib/bio/twobit/references/drosim1.rb,<br /> lib/bio/twobit/references/drovir2.rb,<br /> lib/bio/twobit/references/droyak2.rb,<br /> lib/bio/twobit/references/ebovir3.rb,<br /> lib/bio/twobit/references/echtel2.rb,<br /> lib/bio/twobit/references/equcab3.rb,<br /> lib/bio/twobit/references/erieur2.rb,<br /> lib/bio/twobit/references/felcat9.rb,<br /> lib/bio/twobit/references/gadmor1.rb,<br /> lib/bio/twobit/references/galgal6.rb,<br /> lib/bio/twobit/references/geofor1.rb,<br /> lib/bio/twobit/references/gorgor6.rb,<br /> lib/bio/twobit/references/hetgla2.rb,<br /> lib/bio/twobit/references/latcha1.rb,<br /> lib/bio/twobit/references/loxafr3.rb,<br /> lib/bio/twobit/references/maceug2.rb,<br /> lib/bio/twobit/references/macfas5.rb,<br /> lib/bio/twobit/references/manpen1.rb,<br /> lib/bio/twobit/references/melgal1.rb,<br /> lib/bio/twobit/references/melund1.rb,<br /> lib/bio/twobit/references/micmur2.rb,<br /> lib/bio/twobit/references/mondom5.rb,<br /> lib/bio/twobit/references/myoluc2.rb,<br /> lib/bio/twobit/references/nanpar1.rb,<br /> lib/bio/twobit/references/naslar1.rb,<br /> lib/bio/twobit/references/neosch1.rb,<br /> lib/bio/twobit/references/nomleu3.rb,<br /> lib/bio/twobit/references/ochpri3.rb,<br /> lib/bio/twobit/references/orenil2.rb,<br /> lib/bio/twobit/references/ornana2.rb,<br /> lib/bio/twobit/references/orycun2.rb,<br /> lib/bio/twobit/references/orylat2.rb,<br /> lib/bio/twobit/references/otogar3.rb,<br /> lib/bio/twobit/references/oviari4.rb,<br /> lib/bio/twobit/references/panpan3.rb,<br /> lib/bio/twobit/references/pantro6.rb,<br /> lib/bio/twobit/references/papanu4.rb,<br /> lib/bio/twobit/references/papham1.rb,<br /> lib/bio/twobit/references/petmar3.rb,<br /> lib/bio/twobit/references/ponabe2.rb,<br /> lib/bio/twobit/references/ponabe3.rb,<br /> lib/bio/twobit/references/pripac1.rb,<br /> lib/bio/twobit/references/procap1.rb,<br /> lib/bio/twobit/references/ptevam1.rb,<br /> lib/bio/twobit/references/saccer3.rb,<br /> lib/bio/twobit/references/saibol1.rb,<br /> lib/bio/twobit/references/sarhar1.rb,<br /> lib/bio/twobit/references/sorara2.rb,<br /> lib/bio/twobit/references/spetri2.rb,<br /> lib/bio/twobit/references/strpur2.rb,<br /> lib/bio/twobit/references/taegut2.rb,<br /> lib/bio/twobit/references/tarsyr2.rb,<br /> lib/bio/twobit/references/tetnig2.rb,<br /> lib/bio/twobit/references/thasir1.rb,<br /> lib/bio/twobit/references/triman1.rb,<br /> lib/bio/twobit/references/tupbel1.rb,<br /> lib/bio/twobit/references/turtru2.rb,<br /> lib/bio/twobit/references/uusfur1.rb,<br /> lib/bio/twobit/references/vicpac2.rb,<br /> lib/bio/twobit/references/wuhcor1.rb,<br /> lib/bio/twobit/references/danrer10.rb,<br /> lib/bio/twobit/references/danrer11.rb,<br /> lib/bio/twobit/references/rhemac10.rb,<br /> lib/bio/twobit/references/susscr11.rb,<br /> lib/bio/twobit/references/xentro10.rb,<br /> lib/bio/twobit/references/crigrichov2.rb,<br /> ext/bio/twobit/twobit.c</span>
+    <dd>lib/bio/twobit.rb<span class="defines">,<br>
+  lib/bio/twobit/version.rb,<br> lib/bio/twobit/metadata.rb,<br> lib/bio/twobit/cache_path.rb,<br> lib/bio/twobit/downloader.rb,<br> lib/bio/twobit/references/cb3.rb,<br> lib/bio/twobit/references/ci2.rb,<br> lib/bio/twobit/references/dm6.rb,<br> lib/bio/twobit/references/dp3.rb,<br> lib/bio/twobit/references/fr2.rb,<br> lib/bio/twobit/references/hs1.rb,<br> lib/bio/twobit/references/mm9.rb,<br> lib/bio/twobit/references/rn6.rb,<br> lib/bio/twobit/references/ce11.rb,<br> lib/bio/twobit/references/hg19.rb,<br> lib/bio/twobit/references/hg38.rb,<br> lib/bio/twobit/references/mm10.rb,<br> lib/bio/twobit/references/mm39.rb,<br> lib/bio/twobit/reference_genome.rb,<br> lib/bio/twobit/references/caepb2.rb,<br> lib/bio/twobit/references/ailmel1.rb,<br> lib/bio/twobit/references/allmis1.rb,<br> lib/bio/twobit/references/anocar2.rb,<br> lib/bio/twobit/references/anogam3.rb,<br> lib/bio/twobit/references/apimel2.rb,<br> lib/bio/twobit/references/aplcal1.rb,<br> lib/bio/twobit/references/aptman1.rb,<br> lib/bio/twobit/references/aquchr2.rb,<br> lib/bio/twobit/references/balacu1.rb,<br> lib/bio/twobit/references/bostau7.rb,<br> lib/bio/twobit/references/braflo1.rb,<br> lib/bio/twobit/references/caejap1.rb,<br> lib/bio/twobit/references/caerem3.rb,<br> lib/bio/twobit/references/caljac4.rb,<br> lib/bio/twobit/references/calmil1.rb,<br> lib/bio/twobit/references/canfam4.rb,<br> lib/bio/twobit/references/canfam6.rb,<br> lib/bio/twobit/references/cersim1.rb,<br> lib/bio/twobit/references/chlsab2.rb,<br> lib/bio/twobit/references/chohof1.rb,<br> lib/bio/twobit/references/chrpic1.rb,<br> lib/bio/twobit/references/dasnov3.rb,<br> lib/bio/twobit/references/dipord1.rb,<br> lib/bio/twobit/references/droana2.rb,<br> lib/bio/twobit/references/droere1.rb,<br> lib/bio/twobit/references/drogri1.rb,<br> lib/bio/twobit/references/dromoj2.rb,<br> lib/bio/twobit/references/droper1.rb,<br> lib/bio/twobit/references/drosec1.rb,<br> lib/bio/twobit/references/drosim1.rb,<br> lib/bio/twobit/references/drovir2.rb,<br> lib/bio/twobit/references/droyak2.rb,<br> lib/bio/twobit/references/ebovir3.rb,<br> lib/bio/twobit/references/echtel2.rb,<br> lib/bio/twobit/references/equcab3.rb,<br> lib/bio/twobit/references/erieur2.rb,<br> lib/bio/twobit/references/felcat9.rb,<br> lib/bio/twobit/references/gadmor1.rb,<br> lib/bio/twobit/references/galgal6.rb,<br> lib/bio/twobit/references/geofor1.rb,<br> lib/bio/twobit/references/gorgor6.rb,<br> lib/bio/twobit/references/hetgla2.rb,<br> lib/bio/twobit/references/latcha1.rb,<br> lib/bio/twobit/references/loxafr3.rb,<br> lib/bio/twobit/references/maceug2.rb,<br> lib/bio/twobit/references/macfas5.rb,<br> lib/bio/twobit/references/manpen1.rb,<br> lib/bio/twobit/references/melgal1.rb,<br> lib/bio/twobit/references/melund1.rb,<br> lib/bio/twobit/references/micmur2.rb,<br> lib/bio/twobit/references/mondom5.rb,<br> lib/bio/twobit/references/myoluc2.rb,<br> lib/bio/twobit/references/nanpar1.rb,<br> lib/bio/twobit/references/naslar1.rb,<br> lib/bio/twobit/references/neosch1.rb,<br> lib/bio/twobit/references/nomleu3.rb,<br> lib/bio/twobit/references/ochpri3.rb,<br> lib/bio/twobit/references/orenil2.rb,<br> lib/bio/twobit/references/ornana2.rb,<br> lib/bio/twobit/references/orycun2.rb,<br> lib/bio/twobit/references/orylat2.rb,<br> lib/bio/twobit/references/otogar3.rb,<br> lib/bio/twobit/references/oviari4.rb,<br> lib/bio/twobit/references/panpan3.rb,<br> lib/bio/twobit/references/pantro6.rb,<br> lib/bio/twobit/references/papanu4.rb,<br> lib/bio/twobit/references/papham1.rb,<br> lib/bio/twobit/references/petmar3.rb,<br> lib/bio/twobit/references/ponabe2.rb,<br> lib/bio/twobit/references/ponabe3.rb,<br> lib/bio/twobit/references/pripac1.rb,<br> lib/bio/twobit/references/procap1.rb,<br> lib/bio/twobit/references/ptevam1.rb,<br> lib/bio/twobit/references/saccer3.rb,<br> lib/bio/twobit/references/saibol1.rb,<br> lib/bio/twobit/references/sarhar1.rb,<br> lib/bio/twobit/references/sorara2.rb,<br> lib/bio/twobit/references/spetri2.rb,<br> lib/bio/twobit/references/strpur2.rb,<br> lib/bio/twobit/references/taegut2.rb,<br> lib/bio/twobit/references/tarsyr2.rb,<br> lib/bio/twobit/references/tetnig2.rb,<br> lib/bio/twobit/references/thasir1.rb,<br> lib/bio/twobit/references/triman1.rb,<br> lib/bio/twobit/references/tupbel1.rb,<br> lib/bio/twobit/references/turtru2.rb,<br> lib/bio/twobit/references/uusfur1.rb,<br> lib/bio/twobit/references/vicpac2.rb,<br> lib/bio/twobit/references/wuhcor1.rb,<br> lib/bio/twobit/references/danrer10.rb,<br> lib/bio/twobit/references/danrer11.rb,<br> lib/bio/twobit/references/rhemac10.rb,<br> lib/bio/twobit/references/susscr11.rb,<br> lib/bio/twobit/references/xentro10.rb,<br> lib/bio/twobit/references/crigrichov2.rb,<br> ext/bio/twobit/twobit.c</span>
+
 </dd>
   </dl>
   
@@ -103,20 +106,14 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Reader for .2bit files (i.e., from UCSC genome browser)</p>
-
+    <p>Reader for .2bit files (i.e., from UCSC genome browser)</p>
 
   </div>
 </div>
 <div class="tags">
   
 
-</div><div id="subclasses">
-  <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="TwoBit/ReferenceGenome.html" title="Bio::TwoBit::ReferenceGenome (class)">ReferenceGenome</a></span></p>
-</div>
-<h2>Defined Under Namespace</h2>
+</div><h2>Defined Under Namespace</h2>
 <p class="children">
   
     
@@ -171,9 +168,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute metadata.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute metadata.</p></div></span>
   
 </li>
 
@@ -214,6 +209,7 @@
 
       
     </ul>
+    
   
     <h2>
       Instance Method Summary
@@ -395,9 +391,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>A new instance of TwoBit.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>A new instance of TwoBit.</p></div></span>
   
 </li>
 
@@ -465,9 +459,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Since “end” is a reserved word in Ruby, use “stop” instead.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'><p>Since &quot;end&quot; is a reserved word in Ruby, use &quot;stop&quot; instead.</p></div></span>
   
 </li>
 
@@ -495,6 +487,7 @@
 
       
     </ul>
+    
   
 
 <div id="constructor_details" class="method_details_list">
@@ -511,9 +504,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns a new instance of TwoBit.</p>
-
+    <p>Returns a new instance of TwoBit.</p>
 
   </div>
 </div>
@@ -581,9 +572,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns the value of attribute metadata.</p>
-
+    <p>Returns the value of attribute metadata.</p>
 
   </div>
 </div>
@@ -1289,9 +1278,7 @@ error:
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Since “end” is a reserved word in Ruby, use “stop” instead.</p>
-
+    <p>Since &quot;end&quot; is a reserved word in Ruby, use &quot;stop&quot; instead.</p>
 
   </div>
 </div>
@@ -1401,9 +1388,9 @@ error:
 </div>
 
       <div id="footer">
-  Generated on Fri Nov 21 09:58:53 2025 by
+  Generated on Fri Jun 19 00:29:05 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.4.7).
+  0.9.44 (ruby-4.0.5).
 </div>
 
     </div>
